@@ -2,7 +2,7 @@
   (:import [net.fortuna.mstor]
            [java.util Properties]
            [java.io FileInputStream File]
-           [javax.mail.internet MimeMessage MimeMultipart]
+           [javax.mail.internet MimeMessage MimeMultipart InternetAddress MimeUtility]
            [javax.mail Session Store Folder Message URLName]))
 
 ;; three useful methods lifted from clojure-mail
@@ -43,8 +43,23 @@
    the absolute path to the mbox archive you want to work with."
   [path]
   (let [p (as-properties
-           [["mail.store.protocol" "mstor"]])]
+           [["mail.store.protocol" "mstor"]
+            ["mstor.mbox.metadataStrategy" "xml"]])]
     (doto
         (.getStore (Session/getDefaultInstance p)
                    (URLName. (str "mstor:" path)))
       (.connect))))
+
+(defn open-and-get-all-messages-from-folderless-store
+  "Gets all messages from a folderless store as a lazy seq. The folder will need
+   closing at a later stage."
+  [store]
+  (let [folder (.getDefaultFolder store)]
+    (.open folder Folder/READ_ONLY)
+    (println (str "Getting " (.getMessageCount folder) " messages..."))
+    (lazy-seq (.getMessages folder))))
+
+(defn get-all-messages-from-folderless-store
+  "Opens a folder, gets all messages and closes the folder."
+  [store]
+  ())
