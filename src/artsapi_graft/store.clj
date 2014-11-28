@@ -63,4 +63,5 @@
 (defn get-all-messages-from-folderless-store
   "Opens a folder, gets all messages and closes the folder."
   [store]
+  ; (map ->msg all-messages)
   ())
