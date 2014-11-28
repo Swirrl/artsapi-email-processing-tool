@@ -36,4 +36,14 @@
   [msg]
   (str (sent-date msg)))
 
+(defn received-date
+  "Returns a clojure date time instance corresponding to the received date."
+  [msg]
+  (.getReceivedDate msg))
+
+(defn received-date->string
+  "Returns a string of the date ad time an email was received."
+  [msg]
+  (str (received-date msg)))
+
 (defn cc)
