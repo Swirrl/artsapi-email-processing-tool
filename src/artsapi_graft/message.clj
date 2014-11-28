@@ -1,4 +1,4 @@
-(ns artsapi-graft.store
+(ns artsapi-graft.message
   (:import [javax.mail.internet
             MimeMessage
             MimeMultipart

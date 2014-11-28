@@ -44,6 +44,7 @@
   [path]
   (let [p (as-properties
            [["mail.store.protocol" "mstor"]
+            ["mstor.cache.disabled" "true"]
             ["mstor.mbox.metadataStrategy" "xml"]])]
     (doto
         (.getStore (Session/getDefaultInstance p)
