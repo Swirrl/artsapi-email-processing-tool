@@ -7,6 +7,16 @@
 
 ;; NB for some reason you may have to (.saveChanges msg) to populate fields
 
+(defn get-header
+  "Returns the header corresponding to the string passed in, if it exists.
+   This will be returned as a string or vector of strings."
+  [msg header]
+  (let [header-field (.getHeader msg header)]
+    (when (not= nil header-field)
+      (if (> (count header-field) 1)
+        (vec header-field)
+        (str (get header-field 0))))))
+
 (defn subject
   [msg]
   (.getSubject msg))
