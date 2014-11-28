@@ -3,9 +3,8 @@
             MimeMessage
             MimeMultipart
             InternetAddress
-            MimeUtility]))
-
-;; NB for some reason you may have to (.saveChanges msg) to populate fields
+            MimeUtility]
+           [javax.mail Message Message$RecipientType]))
 
 (defn get-header
   "Returns the header corresponding to the string passed in, if it exists.
@@ -21,27 +20,39 @@
   [msg]
   (.getSubject msg))
 
-(defn from
+(defn sender
   "Returns a InternetAddress object from the sender's metadata"
   [msg]
-  (let [sender (.getFrom msg)]
-    (get sender 0)))
+  (let [sender-email (.getFrom msg)]
+    (get sender-email 0)))
 
-(defn from->string
+(defn sender->str
   "Returns a string of the sender's email"
   [msg]
-  (.getAddress (from msg)))
+  (.getAddress (sender msg)))
 
-(defn to)
+(defn to
+  "Returns a InternetAddress object of all recipients' addresses."
+  [msg]
+  (let [recipients (.getRecipients msg Message$RecipientType/TO)]
+    (if (> (count recipients) 1)
+      (set recipients)
+      (get recipients 0))))
 
-(defn to->string)
+(defn to->str
+  "Returns a vector of strings of all recipients' email addresses."
+  [msg]
+  (let [recipients (to msg)]
+    (if (seq? recipients)
+      (map #(.getAddress (get % 0)) recipients)
+      (.getAddress recipients))))
 
 (defn sent-date
   "Returns a clojure date time instance corresponding to the send date"
   [msg]
   (.getSentDate msg))
 
-(defn sent-date->string
+(defn sent-date->str
   "Returns a string of the date and time an email was sent"
   [msg]
   (str (sent-date msg)))
@@ -51,9 +62,20 @@
   [msg]
   (.getReceivedDate msg))
 
-(defn received-date->string
+(defn received-date->str
   "Returns a string of the date ad time an email was received."
   [msg]
   (str (received-date msg)))
 
-(defn cc)
+(defn cc
+  [msg]
+  msg)
+
+(defn ->msg
+  "Return a map of strings representing the message."
+  [msg]
+  {:from (sender->str msg)
+   :to (to->str msg)
+   :subject (subject msg)
+   :cc ""})
+

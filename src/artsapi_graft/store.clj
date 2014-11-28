@@ -3,7 +3,7 @@
            [java.util Properties]
            [java.io FileInputStream File]
            [javax.mail.internet MimeMessage MimeMultipart InternetAddress MimeUtility]
-           [javax.mail Session Store Folder Message URLName Flags Flags$Flag]))
+           [javax.mail Session Store Folder Message URLName Flags Flags$Flag  Message$RecipientType]))
 
 ;; three useful methods lifted from clojure-mail
 
