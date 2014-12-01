@@ -1,4 +1,5 @@
 (ns artsapi-graft.store
+  (:require [artsapi-graft.message :refer [->msg]])
   (:import [net.fortuna.mstor]
            [java.util Properties]
            [java.io FileInputStream File]
@@ -38,6 +39,10 @@
 ;; basically a re-implementation of clojure-mail's store without the
 ;; assumption that we want to connect to an imap store
 
+;; has some other utility methods that wrap parts of the javamail and
+;; mstor APIs to allow for working with mbox files in read only and
+;; read write mode.
+
 (defn store
   "A store models a message store in mbox format. Pass this function
    the absolute path to the mbox archive you want to work with."
@@ -51,17 +56,53 @@
                    (URLName. (str "mstor:" path)))
       (.connect))))
 
-(defn open-and-get-all-messages-from-folderless-store
-  "Gets all messages from a folderless store as a lazy seq. The folder will need
-   closing at a later stage."
-  [store]
-  (let [folder (.getDefaultFolder store)]
-    (.open folder Folder/READ_ONLY)
-    (println (str "Getting " (.getMessageCount folder) " messages..."))
-    (lazy-seq (.getMessages folder))))
+(defn open-read-only-folder
+  "Open a folder in read only mode."
+  [folder]
+  (.open folder Folder/READ_ONLY))
 
-(defn get-all-messages-from-folderless-store
-  "Opens a folder, gets all messages and closes the folder."
-  [store]
-  ; (map ->msg all-messages)
-  ())
+(defn close-read-only-folder
+  "Close a read only folder. As it is read only, we don't expunge deleted messages."
+  [folder]
+  (.close folder false))
+
+(defn open-folder
+  "Open a folder in Read/Write mode."
+  [folder]
+  (.open folder Folder/READ_WRITE))
+
+(defn close-folder
+  "Close a folder. We also expunge any messages that have been deleted.
+   This will throw an exception for a read only folder."
+  [folder]
+  (.close folder true))
+
+(defn get-msg-count-for
+  "Return the number of messages in a folder. The folder must be open."
+  [folder]
+  (.getMessageCount folder))
+
+(defn get-messages
+  "Get all messages from the specified folder. This will return a seq of msg hash objects."
+  [folder]
+  (try 
+    (open-read-only-folder folder)
+    (let [ret (map ->msg (.getMessages folder))]
+      (close-read-only-folder folder)
+      ret)
+    (catch javax.mail.FolderNotFoundException e
+      nil)))
+
+(defn get-folders [store folder-names]
+  (->> folder-names
+       (map (fn [name]
+              (if (= :default name)
+                (.getDefaultFolder store)
+                (.getFolder store name))))
+       (filter identity)))
+
+(defn get-all-messages
+  "Gets all messages from a store as a seq."
+  [store folders]
+  (mapcat get-messages (get-folders store folders)))
+
