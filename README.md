@@ -1,14 +1,13 @@
-# artsapi-graft
+# ArtsAPI ETL
 
-A Clojure library designed to ... well, that part is up to you.
+The ETL tooling for ArtsAPI, based on the [Grafter project](http://grafter.org). Mainly focussed on email parsing and RDF conversion. 
 
 ## Usage
 
-FIXME
+TODO
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2014 Swirrl IT Limited
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the Eclipse Public License 1.0
