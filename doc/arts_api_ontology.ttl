@@ -1,0 +1,185 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
+@prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix dct:        <http://purl.org/dc/terms/> .
+@prefix gr:         <http://purl.org/goodrelations/v1#> .
+@prefix owlTime:    <http://www.w3.org/2006/time#> .
+@prefix org:        <http://www.w3.org/ns/org#> .
+@prefix vcard:      <http://www.w3.org/2006/vcard/ns#> .
+@prefix prov:       <http://www.w3.org/ns/prov#> .
+@prefix sioc:       <http://rdfs.org/sioc/ns#> . # for follows and has_subscriber
+@prefix arts:       <http://artsapi.co.uk/def/arts/> .
+
+# Ontology metadata
+#---------------------------------------------------------
+
+arts:ontology a owl:Ontology;
+
+    rdfs:label "Arts Organizations ontology"@en;
+    rdfs:comment "Vocabulary for describing connections between organizations and agents that are members of organizations in relation to the arts sector. Includes general use classes for fine-grained classification of email correspondence."@en;
+
+    dct:created "2014-11-20"^^xsd:date;
+    dct:title "Arts Organizations ontology"@en;
+    dct:contributor [foaf:mbox "alex@swirrl.com"; foaf:name "Alex Lynham"], [foaf:mbox "bill@swirrl.com"; foaf:name "Bill Roberts"];
+    dct:licence <http://www.opendatacommons.org/licenses/pddl/1.0/>;
+    .
+
+# Core classes
+#---------------------------------------------------------
+
+arts:Domain a owl:Class, rdfs:Class;
+    rdfs:label "A domain name or host"@en;
+    rdfs:comment "A website domain name is a string that identifies an internet result such as a website. It is assumed that a domain denotes administrative authority on the part of the owner."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
+arts:TwitterAccount a owl:Class, rdfs:Class;
+    rdfs:label "A Twitter user account"@en;
+    rdfs:comment "Represents a user account on the microblogging service Twitter."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:OnlineAccount;
+    .
+
+arts:EmailAccount a owl:Class, rdfs:Class;
+    rdfs:label "An Email account. This is an abstraction that can be used to hold a mailto:URI where a foaf:Person is not available or not known, and thus cannot be used as the subject of a triple where a predicate of vcard:hasEmail or foaf:mbox points to the mailto:URI."@en;
+    rdfs:comment "Represents a user email account."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:OnlineAccount;
+    .
+
+arts:Message a owl:Class, rdfs:Class;
+    rdfs:label "A Message"@en;
+    rdfs:comment "Represents a message directly transmitted between two or more foaf:OnlineAccounts, appropriate subclasses or other messaging resources or identifiers. A message, unlike a Post, is directed."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:Document, owl:Thing;
+    .
+
+arts:Post a owl:Class, rdfs:Class;
+    rdfs:label "A Post"@en;
+    rdfs:comment "Represents a post; this could be a blog post or an appropriate feed update, but is distinct from a static web resource or a Message."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:Document, owl:Thing;
+    .
+
+arts:Tweet a owl:Class, rdfs:Class;
+    rdfs:label "A Tweet"@en;
+    rdfs:comment "Represents a post or Tweet on the microblogging service Twitter. This can be thought of as a Post rather than a message. Direct Messages on the service can be thought of as Messages."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf arts:Post;
+    .
+
+arts:Email a owl:Class, rdfs:Class;
+    rdfs:label "An Email message."@en;
+    rdfs:comment "An Email message."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf arts:Message;
+    .
+
+# Properties and relationships
+#---------------------------------------------------------
+
+arts:ownsDomain a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Owns domain"@en;
+    rdfs:comment "Indicates a web domain that is owned by an Organization."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain org:Organization;
+    rdfs:range arts:Domain;
+    .
+
+arts:hasDomain a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Has domain"@en;
+    rdfs:comment "Indicates that the thing to which this property refers has a connection to a Domain. In the case of an Email, it would refer to the Domain the Email was sent from. A foaf:OnlineAccount for example might also be linked to the Domain on which the account was registered."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:range arts:Domain;
+    .
+
+arts:worksOn a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Works on"@en;
+    rdfs:comment "Indicates that work is being done on a Project."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:range foaf:Project;
+    .
+
+arts:workedOn a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Worked on"@en;
+    rdfs:comment "Indicates that work has been done on a Project"@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:range foaf:Project;
+    .
+
+arts:sender a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Sender"@en;
+    rdfs:comment "Indicates that something (a subclass of owl:Thing) has been sent by the object of this triple. The object might be a discrete foaf:Person, Agent or mailto:URI, for example."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
+arts:tweetSender a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Tweet sender"@en;
+    rdfs:comment "Indicates that a Tweet was sent by the object of this triple."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subPropertyOf arts:sender;
+    rdfs:domain arts:Tweet;
+    .
+
+arts:emailSender a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Email sender"@en;
+    rdfs:comment "Indicates that an Email was sent by the object of this triple."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subPropertyOf arts:sender;
+    rdfs:domain arts:Email;
+    .
+
+arts:sentAt a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Sent at"@en;
+    rdfs:comment "A timestamp to specify when a Thing was sent."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:range xsd:dateTime;
+    .
+
+arts:subject a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Subject"@en;
+    rdfs:comment "A string representing the main subject of a message."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
+arts:emailSubject a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Email subject"@en;
+    rdfs:comment "A string representing the subject line of a message."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain arts:Email;
+    rdfs:subPropertyOf arts:subject;
+    .
+
+arts:recipient a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Recipient"@en;
+    rdfs:comment "Indicates the recipient of a message, or the intended reader, in the case of a tag or mention, where a target reader is expressed as part of metadata as opposed to directly in the messaging protocol, as with Email or Direct Messages."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
+arts:emailRecipient a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Email recipient"@en;
+    rdfs:comment "Indicates the recipient of an email."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain arts:Email;
+    rdfs:subPropertyOf arts:recipient;
+    .
+
+arts:ccRecipient a owl:ObjectProperty, rdf:Property;
+    rdfs:label "CC recipient"@en;
+    rdfs:comment "Indicates a email address or reference to a Person CC'd on a sent email message."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain arts:Email;
+    rdfs:subPropertyOf arts:recipient;
+    .
+
+arts:mentions a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Mentions"@en;
+    rdfs:comment "Indicates a unique TwitterAccount that is mentioned in a Tweet."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain arts:Tweet;
+    rdfs:range arts:TwitterAccount;
+    rdfs:subPropertyOf arts:recipient;
+    .

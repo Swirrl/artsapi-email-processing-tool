@@ -1,0 +1,41 @@
+# ---------------------------------
+# Example resources
+# NB: these assume the same set of prefixes as in the ontology turtle file
+
+# /graph/emails/id/:email
+
+<email> a arts:Email;
+  arts:emailSender "alex@swirrl.com";
+  arts:emailRecipient "ric@swirrl.com";
+  arts:emailSubject "Coffee machine broken.";
+  arts:ccRecipient "bill@swirrl.com";
+  arts:ccRecipient "guy@swirrl.com";
+  arts:hasDomain "swirrl.com";
+  arts:sentAt ""^^xsd:dateTime;
+  .
+
+# /graph/people/id/:person
+
+<person> a foaf:Person;
+  foaf:Account </graph/people/id/alex-lynham/accounts/twitter>;
+  foaf:Account </graph/people/id/alex-lynham/accounts/email>;
+  foaf:name "Alex Lynham";
+  foaf:givenName "Alex";
+  foaf:familyName "Lynham";
+  foaf:knows </graph/people/id/robin-gower>;
+  foaf:made <graph/emails/id/email-id>;
+  vcard:hasEmail "alex@swirrl.com";
+  foaf:mbox "alex@swirrl.com";
+  org:memberOf </graph/organisations/swirrl>;
+  .
+
+# /graph/organisations/id/:org
+
+<organisation> a org:Organization;
+  rdfs:label "Swirrl";
+  org:hasMember </graph/people/id/alex-lynham>;
+  org:hasMember </graph/people/id/ric-roberts>;
+  org:linkedTo </graph/organisations/id/infonomics>;
+  arts:ownsDomain </graph/domains/id/swirrl-com>;
+  arts:worksOn </graph/projects/id/arts-api>;
+  .
