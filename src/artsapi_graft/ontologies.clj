@@ -7,6 +7,12 @@
 
 (def arts:TwitterAccount (arts "TwitterAccount"))
 
+(def arts:EmailAccount (arts "EmailAccount"))
+
+(def arts:Message (arts "Message"))
+
+(def arts:Post (arts "Post"))
+
 (def arts:Tweet (arts "Tweet"))
 
 (def arts:Email (arts "Email"))
@@ -26,6 +32,10 @@
 (def arts:emailSender (arts "emailSender"))
 
 (def arts:sentAt (arts "sentAt"))
+
+(def arts:subject (arts "subject"))
+
+(def arts:emailSubject (arts "emailSubject"))
 
 (def arts:recipient (arts "recipient"))
 
