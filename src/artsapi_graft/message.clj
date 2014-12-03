@@ -83,6 +83,8 @@
   {:from (address->str (get-sender msg))
    :from-personal (get-personal (get-sender msg))
    :from-domain (get-domain (get-sender msg))
+   :sent-date (sent-date->str msg)
+   :received-date (received-date->str msg)
    :to (map #(-> {:personal (get-personal %)
                   :email (address->str %)
                   :domain (get-domain %)})

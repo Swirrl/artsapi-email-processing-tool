@@ -1,6 +1,7 @@
 (ns artsapi-graft.prefixers
   (:require [grafter.rdf.ontologies.util :refer :all]
-            [artsapi-graft.ontologies :refer :all]))
+            [artsapi-graft.ontologies :refer :all]
+            [digest :refer :all]))
 
 ;; graph uris
 
@@ -42,3 +43,7 @@
   (str (base-resource-uri graph) "/"
        (->slug id-string)))
 
+(defn email-uri
+  [from sent-at]
+  (let [mashed-str (str from sent-at)]
+    (resource-uri "emails" (digest/md5 mashed-str))))

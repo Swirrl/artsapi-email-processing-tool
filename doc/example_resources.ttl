@@ -4,7 +4,7 @@
 
 # /graph/emails
 # /id/emails/:email
-# e.g. /id/emails/email-id-string
+# e.g. /id/emails/<hash-goes-here>
 
 <email> a arts:Email;
   arts:emailSender </id/people/alex-swirrl-com>;
@@ -18,7 +18,7 @@
 
 # /graph/tweets
 # /id/tweets/:tweet
-# e.g. /id/tweets/tweet-id-string
+# e.g. /id/tweets/<hash-goes-here>
 
 <tweet> a arts:Tweet;
   arts:tweetSender </id/twitter-accounts/hipsters_unite>;
@@ -36,7 +36,7 @@
   foaf:givenName "Alex";
   foaf:familyName "Lynham";
   foaf:knows </id/people/robin-infonomics-ltd-uk>;
-  foaf:made </id/emails/email-id>;
+  foaf:made </id/emails/hash-goes-here>;
   vcard:hasEmail "alex@swirrl.com";
   foaf:mbox "alex@swirrl.com";
   org:memberOf </id/organisations/swirrl>;

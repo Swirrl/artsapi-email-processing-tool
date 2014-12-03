@@ -1,4 +1,4 @@
-(ns artsapi-graft.ontololgies
+(ns artsapi-graft.ontologies
   (:require [grafter.rdf.ontologies.util :refer :all]))
 
 (def arts-domain (prefixer "http://artsapi.co.uk/"))
