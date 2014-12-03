@@ -1,6 +1,8 @@
 (ns artsapi-graft.ontololgies
   (:require [grafter.rdf.ontologies.util :refer :all]))
 
+(def arts-domain (prefixer "http://artsapi.co.uk/"))
+
 (def arts (prefixer "http://artsapi.co.uk/def/arts/"))
 
 (def arts:Domain (arts "Domain"))
@@ -34,6 +36,8 @@
 (def arts:sentAt (arts "sentAt"))
 
 (def arts:subject (arts "subject"))
+
+(def arts:content (arts "content"))
 
 (def arts:emailSubject (arts "emailSubject"))
 
