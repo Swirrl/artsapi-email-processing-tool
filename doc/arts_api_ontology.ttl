@@ -145,6 +145,11 @@ arts:subject a owl:ObjectProperty, rdf:Property;
     rdfs:isDefinedBy arts:ontology;
     .
 
+arts:content a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Content"@en;
+    rdfs:comment "The content of a message."@en;
+    rdfs:isDefinedBy arts:ontology;
+
 arts:emailSubject a owl:ObjectProperty, rdf:Property;
     rdfs:label "Email subject"@en;
     rdfs:comment "A string representing the subject line of a message."@en;

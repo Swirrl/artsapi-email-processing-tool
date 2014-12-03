@@ -2,6 +2,8 @@
   (:require [grafter.rdf.ontologies.util :refer :all]
             [artsapi-graft.ontologies :refer :all]))
 
+;; graph uris
+
 (def base-graph (prefixer (arts "graph/")))
 
 (def organisation-graph-uri (prefixer (base-graph "organisations")))
@@ -14,21 +16,29 @@
 
 (def email-graph-uri (prefixer (base-graph "emails")))
 
+(def tweet-graph-uri (prefixer (base-graph "tweets")))
+
+(def twitter-account-graph-uri (prefixer (base-graph "twitter-accounts")))
+
+(def email-account-graph-uri (prefixer (base-graph "email-accounts")))
+
+;; resource uris
+
+(def base-resource-uri (prefixer (arts "id/")))
+
 (defn ->slug
-  [id-string])
+  [id-string]
+  (-> id-string
+      (clojure.string/trim)
+      (clojure.string/lower-case)
+      (clojure.string/replace #"\.|@| " "-")))
 
 (defn resource-uri
   "Generate a resource uri. For example, these outputs should be expected:
-   ['people' 'Jeff Lebowski] ;=>
-   ['email' 'jeff@example.com'] ;=>
-   ['domain' 'swirrl.com'] ;=> "
+   ['people' 'jeff@example.com'] ;=> /id/people/jeff-example-com
+   ['domain' 'swirrl.com'] ;=> /id/swirrl-com
+   ['twitter-account' 'jeff_lebowski'] ;=> /id/twitter-accounts/jeff_lebowski"
   [graph id-string]
-  (str (prefixer (base-graph "graph/id/"))
+  (str (prefixer (base-resource-uri graph)) "/"
        (->slug id-string)))
-
-(defn user-account
-  "Generate a uri for a user's account. These are nested under the resource uri for the person
-   that owns the account instance.
-   Example: ['Jeff Lebowski' :email] ;=> domain/graph/people/jeff-lebowski/accounts/email"
-  [user-slug account])
 

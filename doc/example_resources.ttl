@@ -2,40 +2,78 @@
 # Example resources
 # NB: these assume the same set of prefixes as in the ontology turtle file
 
-# /graph/emails/id/:email
+# /graph/emails
+# /id/emails/:email
+# e.g. /id/emails/email-id-string
 
 <email> a arts:Email;
-  arts:emailSender "alex@swirrl.com";
-  arts:emailRecipient "ric@swirrl.com";
+  arts:emailSender </id/people/alex-swirrl-com>;
+  arts:emailRecipient </id/people/ric-swirrl-com>;
   arts:emailSubject "Coffee machine broken.";
-  arts:ccRecipient "bill@swirrl.com";
-  arts:ccRecipient "guy@swirrl.com";
-  arts:hasDomain "swirrl.com";
+  arts:ccRecipient </id/people/bill-swirrl-com>;
+  arts:ccRecipient </id/people/guy-swirrl-com>;
+  arts:hasDomain </id/domains/swirrl-com>;
   arts:sentAt ""^^xsd:dateTime;
   .
 
-# /graph/people/id/:person
+# /graph/tweets
+# /id/tweets/:tweet
+# e.g. /id/tweets/tweet-id-string
+
+<tweet> a arts:Tweet;
+  arts:tweetSender </id/twitter-accounts/hipsters_unite>;
+  arts:content "The @swirrl office is full today...";
+  arts:mentions "@swirrl";
+  .
+
+# /graph/people
+# /id/people/:person
 
 <person> a foaf:Person;
-  foaf:Account </graph/people/id/alex-lynham/accounts/twitter>;
-  foaf:Account </graph/people/id/alex-lynham/accounts/email>;
+  foaf:account </id/twitter-accounts/hipsters_unite>;
+  foaf:account </id/email-accounts/alex-swirrl-com>;
   foaf:name "Alex Lynham";
   foaf:givenName "Alex";
   foaf:familyName "Lynham";
-  foaf:knows </graph/people/id/robin-gower>;
-  foaf:made <graph/emails/id/email-id>;
+  foaf:knows </id/people/robin-infonomics-ltd-uk>;
+  foaf:made </id/emails/email-id>;
   vcard:hasEmail "alex@swirrl.com";
   foaf:mbox "alex@swirrl.com";
-  org:memberOf </graph/organisations/swirrl>;
+  org:memberOf </id/organisations/swirrl>;
   .
 
-# /graph/organisations/id/:org
+# /graph/twitter-accounts
+# /id/twitter-accounts/:account
+
+<twitteraccount> a arts:TwitterAccount;
+  foaf:accountName "hipsters_unite"; # NB an arts:tweetSender will probably be a arts:TwitterAccount; the TwitterAccount will link to the foaf:Agent or subclass. Contrast with arts:emailSender
+  .
+
+# /graph/email-accounts
+# /id/email-accounts/:account
+# this is included for the sake of symmetry, but is not key to the ontology.
+
+<emailaccount> a arts:EmailAccount;
+  foaf:accountName "Alex Lynham"; # the 'Personal' metadata; may be blank
+  vcard:hasEmail "alex@swirrl.com"; # NB an arts:emailSender should be a subclass of foaf:Agent
+  .
+
+# /graph/organisations
+# /id/organisations/:org
 
 <organisation> a org:Organization;
   rdfs:label "Swirrl";
-  org:hasMember </graph/people/id/alex-lynham>;
-  org:hasMember </graph/people/id/ric-roberts>;
-  org:linkedTo </graph/organisations/id/infonomics>;
-  arts:ownsDomain </graph/domains/id/swirrl-com>;
-  arts:worksOn </graph/projects/id/arts-api>;
+  org:hasMember </id/people/alex-swirrl-com>;
+  org:hasMember </id/people/ric-swirrl-com>;
+  org:linkedTo </id/organisations/infonomics>;
+  arts:ownsDomain </id/domains/swirrl-com>;
+  arts:worksOn </id/projects/arts-api>;
+  .
+
+# /graph/domains
+# /id/domains/:domain
+
+<domain> a arts:Domain;
+  rdfs:label "swirrl.com";
+  vcard:hasUrl "http://swirrl.com"
   .
