@@ -44,6 +44,6 @@
        (->slug id-string)))
 
 (defn email-uri
-  [from sent-at]
-  (let [mashed-str (str from sent-at)]
+  [from sent-at subject]
+  (let [mashed-str (str from sent-at subject)]
     (resource-uri "emails" (digest/md5 mashed-str))))

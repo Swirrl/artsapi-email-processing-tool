@@ -1,4 +1,5 @@
 (ns artsapi-graft.message
+  (:require [artsapi-graft.prefixers :refer [email-uri]])
   (:import [javax.mail.internet
             MimeMessage
             MimeMultipart
@@ -80,19 +81,26 @@
 (defn ->msg
   "Return a map of strings representing the message."
   [msg]
-  {:from (address->str (get-sender msg))
-   :from-personal (get-personal (get-sender msg))
-   :from-domain (get-domain (get-sender msg))
-   :sent-date (sent-date->str msg)
-   :received-date (received-date->str msg)
-   :to (map #(-> {:personal (get-personal %)
-                  :email (address->str %)
-                  :domain (get-domain %)})
-            (get-to msg))
-   :subject (get-subject msg)
-   :cc (map #(-> {:personal (get-personal %)
-                  :email (address->str %)
-                  :domain (get-domain %)})
-            (get-cc msg))
-   :content (get-content msg)})
+  (let [sender (get-sender msg)
+        from-str (address->str sender)
+        date (sent-date->str msg)
+        subj (get-subject msg)
+        email-resource-uri (email-uri from-str date subj)]
+    {:from from-str
+     :from-personal (get-personal sender)
+     :from-domain (get-domain sender)
+     :sent-date date
+     :received-date (received-date->str msg)
+     :to (map #(-> {:email-uri email-resource-uri
+                    :personal (get-personal %)
+                    :email (address->str %)
+                    :domain (get-domain %)})
+              (get-to msg))
+     :subject subj
+     :cc (map #(-> {:email-uri email-resource-uri
+                    :personal (get-personal %)
+                    :email (address->str %)
+                    :domain (get-domain %)})
+              (get-cc msg))
+     :content (get-content msg)}))
 

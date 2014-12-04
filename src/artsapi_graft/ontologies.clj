@@ -49,3 +49,14 @@
 
 (def arts:mentions (arts "mentions"))
 
+;; catch missing vcard org and foaf terms
+
+(def vcard:hasEmail "http://www.w3.org/2006/vcard/ns#hasEmail")
+
+(def foaf:made "http://xmlns.com/foaf/0.1/made")
+
+(def foaf:mbox "http://xmlns.com/foaf/0.1/mbox")
+
+(def org:memberOf "http://www.w3.org/ns/org#memberOf")
+
+(def org:hasMember "http://www.w3.org/ns/org#hasMember")
