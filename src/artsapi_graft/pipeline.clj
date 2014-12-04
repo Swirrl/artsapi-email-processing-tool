@@ -101,19 +101,23 @@
 
 (defn sender-pipeline
   [messages]
-  )
+  (-> (get-sender-email-ds messages)
+      (sender-email-template)))
 
 (defn to-field-pipeline
   [messages]
-  )
+  (map (fn [msg] (to-email-template (msg :to)))
+       messages))
 
 (defn cc-field-pipeline
   [messages]
-  )
+  (map (fn [msg] (cc-email-template (msg :cc)))
+       messages))
 
 (defn email-pipeline
   [store]
   (let [messages (->> [:default "inbox" "sent"] (get-all-messages store))]
-    (-> (get-sender-email-ds messages)
-        (sender-email-template))))
+    (lazy-cat (sender-pipeline messages)
+         (to-field-pipeline messages)
+         (cc-field-pipeline messages))))
 
