@@ -96,9 +96,6 @@
                     [arts:ownsDomain (resource-uri "domains")]
                     [org:hasMember (resource-uri "people" email)]])))
 
-;; we make a ds out of the former and proceed directly to
-;; quad-ification with the latter
-
 (defn sender-pipeline
   [messages]
   (-> (get-sender-email-ds messages)
