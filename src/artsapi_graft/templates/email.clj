@@ -4,6 +4,7 @@
             [grafter.rdf.ontologies.rdf :refer :all]
             [grafter.rdf.ontologies.org :refer :all]
             [grafter.rdf.ontologies.foaf :refer :all]
+            [grafter.rdf.ontologies.vcard :refer :all]
             [artsapi-graft.ontologies :refer :all]
             [artsapi-graft.prefixers :refer :all]))
 
@@ -36,7 +37,12 @@
                    [(resource-uri "organisations" from-domain)
                     [rdfs:label from-domain]
                     [arts:ownsDomain (resource-uri "domains" from-domain)]
-                    [org:hasMember (resource-uri "people" from)]])))
+                    [org:hasMember (resource-uri "people" from)]])
+
+            (graph domain-graph-uri
+                   [(resource-uri "domains" from-domain)
+                    [rdfs:label from-domain]
+                    [vcard:hasUrl (str "http://" from-domain)]])))
 
 (defn to-email-template
   [{:keys [email-uri personal email domain]}]
@@ -58,7 +64,12 @@
           [(resource-uri "organisations" domain)
            [rdfs:label domain]
            [arts:ownsDomain (resource-uri "domains" domain)]
-           [org:hasMember (resource-uri "people" email)]])))
+           [org:hasMember (resource-uri "people" email)]])
+
+   (graph domain-graph-uri
+          [(resource-uri "domains" domain)
+           [rdfs:label domain]
+           [vcard:hasUrl (str "http://" domain)]])))
 
 (defn cc-email-template
   [{:keys [email-uri personal email domain]}]
@@ -80,5 +91,10 @@
           [(resource-uri "organisations" domain)
            [rdfs:label domain]
            [arts:ownsDomain (resource-uri "domains" domain)]
-           [org:hasMember (resource-uri "people" email)]])))
+           [org:hasMember (resource-uri "people" email)]])
+
+   (graph domain-graph-uri
+          [(resource-uri "domains" domain)
+           [rdfs:label domain]
+           [vcard:hasUrl (str "http://" domain)]])))
 

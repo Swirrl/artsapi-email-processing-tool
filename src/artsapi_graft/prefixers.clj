@@ -37,7 +37,7 @@
 (defn resource-uri
   "Generate a resource uri. For example, these outputs should be expected:
    ['people' 'jeff@example.com'] ;=> /id/people/jeff-example-com
-   ['domain' 'swirrl.com'] ;=> /id/swirrl-com
+   ['domains' 'swirrl.com'] ;=> /id/swirrl-com
    ['twitter-account' 'jeff_lebowski'] ;=> /id/twitter-accounts/jeff_lebowski"
   [graph id-string]
   (str (base-resource-uri graph) "/"
