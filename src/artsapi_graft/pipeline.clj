@@ -55,7 +55,7 @@
 ;; right predicates
 
 (def to-email-template
-  (graph-fn [[{:keys [email-uri personal email domain]}]]
+  (graph-fn [{:keys [email-uri personal email domain]}]
 
             (graph email-graph-uri
                    [email-uri

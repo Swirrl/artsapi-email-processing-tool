@@ -90,7 +90,6 @@
      :from-personal (get-personal sender)
      :from-domain (get-domain sender)
      :sent-date date
-     :received-date (received-date->str msg)
      :to (map #(-> {:email-uri email-resource-uri
                     :personal (get-personal %)
                     :email (address->str %)
