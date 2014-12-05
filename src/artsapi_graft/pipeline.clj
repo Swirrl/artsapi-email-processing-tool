@@ -54,47 +54,49 @@
 ;; more people and attach those recipients to the email using the
 ;; right predicates
 
-(def to-email-template
-  (graph-fn [{:keys [email-uri personal email domain]}]
+(defn to-email-template
+  [{:keys [email-uri personal email domain]}]
 
-            (graph email-graph-uri
-                   [email-uri
-                    [arts:emailRecipient (resource-uri "people" email)]])
+  (concat 
+   (graph email-graph-uri
+          [email-uri
+           [arts:emailRecipient (resource-uri "people" email)]])
 
-            (graph person-graph-uri
-                   [(resource-uri "people" email)
-                    [rdfs:label personal]
-                    [foaf:name personal]
-                    [vcard:hasEmail email]
-                    [foaf:mbox email]
-                    [org:memberOf (resource-uri "organisations" domain)]])
+   (graph person-graph-uri
+          [(resource-uri "people" email)
+           [rdfs:label personal]
+           [foaf:name personal]
+           [vcard:hasEmail email]
+           [foaf:mbox email]
+           [org:memberOf (resource-uri "organisations" domain)]])
 
-            (graph organisation-graph-uri
-                   [(resource-uri "organisations" domain)
-                    [rdfs:label domain]
-                    [arts:ownsDomain (resource-uri "domains")]
-                    [org:hasMember (resource-uri "people" email)]])))
+   (graph organisation-graph-uri
+          [(resource-uri "organisations" domain)
+           [rdfs:label domain]
+           [arts:ownsDomain (resource-uri "domains" domain)]
+           [org:hasMember (resource-uri "people" email)]])))
 
-(def cc-email-template
-  (graph-fn [{:keys [email-uri personal email domain]}]
+(defn cc-email-template
+  [{:keys [email-uri personal email domain]}]
 
-            (graph email-graph-uri
-                   [email-uri
-                    [arts:ccRecipient (resource-uri "people" email)]])
+  (concat 
+   (graph email-graph-uri
+          [email-uri
+           [arts:ccRecipient (resource-uri "people" email)]])
 
-            (graph person-graph-uri
-                   [(resource-uri "people" email)
-                    [rdfs:label personal]
-                    [foaf:name personal]
-                    [vcard:hasEmail email]
-                    [foaf:mbox email]
-                    [org:memberOf (resource-uri "organisations" domain)]])
+   (graph person-graph-uri
+          [(resource-uri "people" email)
+           [rdfs:label personal]
+           [foaf:name personal]
+           [vcard:hasEmail email]
+           [foaf:mbox email]
+           [org:memberOf (resource-uri "organisations" domain)]])
 
-            (graph organisation-graph-uri
-                   [(resource-uri "organisations" domain)
-                    [rdfs:label domain]
-                    [arts:ownsDomain (resource-uri "domains")]
-                    [org:hasMember (resource-uri "people" email)]])))
+   (graph organisation-graph-uri
+          [(resource-uri "organisations" domain)
+           [rdfs:label domain]
+           [arts:ownsDomain (resource-uri "domains" domain)]
+           [org:hasMember (resource-uri "people" email)]])))
 
 (defn sender-pipeline
   [messages]
@@ -103,12 +105,14 @@
 
 (defn to-field-pipeline
   [messages]
-  (map (fn [msg] (to-email-template (msg :to)))
+  (mapcat (fn [msg]
+            (mapcat to-email-template (msg :to)))
        messages))
 
 (defn cc-field-pipeline
   [messages]
-  (map (fn [msg] (cc-email-template (msg :cc)))
+  (mapcat (fn [msg]
+            (mapcat cc-email-template (msg :cc)))
        messages))
 
 (defn email-pipeline
