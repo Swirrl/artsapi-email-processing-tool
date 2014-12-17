@@ -47,3 +47,8 @@
   [from sent-at subject]
   (let [mashed-str (str from sent-at subject)]
     (resource-uri "emails" (digest/md5 mashed-str))))
+
+(defn tweet-uri
+  [from sent-at content]
+  (let [mashed-str (str from sent-at content)]
+    (resource-uri "tweets" (digest/md5 mashed-str))))

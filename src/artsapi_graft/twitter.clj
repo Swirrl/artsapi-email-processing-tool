@@ -1,5 +1,5 @@
 (ns artsapi-graft.twitter
-  (require [artsapi-graft.json :refer :all]))
+  (:require [artsapi-graft.json :refer :all]))
 
 (defn get-tweets-map-from
   "Returns a lazy sequence of maps. Each map represents a tweet"
