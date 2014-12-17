@@ -5,6 +5,6 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [grafter "0.2.0-SNAPSHOT"]
-                 [clojure-mail "0.1.6"]
                  [org.mnode.mstor/mstor "0.9.13"]
-                 [digest "1.4.4"]])
+                 [digest "1.4.4"]
+                 [cheshire "5.4.0"]])
