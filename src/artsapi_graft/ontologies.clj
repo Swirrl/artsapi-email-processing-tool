@@ -57,6 +57,8 @@
 
 (def foaf:mbox "http://xmlns.com/foaf/0.1/mbox")
 
+(def foaf:accountName "http://xmlns.com/foaf/0.1/accountName")
+
 (def org:memberOf "http://www.w3.org/ns/org#memberOf")
 
 (def org:hasMember "http://www.w3.org/ns/org#hasMember")

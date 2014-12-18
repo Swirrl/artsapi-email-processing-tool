@@ -12,9 +12,21 @@
 (defn tweet-template
   [{:keys [created_at entities user text]}]
 
-  (concat
-   (graph)
-   ))
+  (let [name (user :name)
+        screen-name (user :screen_name)]
+    
+    (concat
+     (graph twitter-account-graph-uri
+            [(resource-uri "twitter-accounts" screen-name)
+             [rdf:a arts:TwitterAccount]
+             [foaf:accountName screen-name]
+             [foaf:nick user]])
+
+     (graph tweet-graph-uri
+            [(tweet-uri screen-name created_at text)
+             [rdf:a arts:Tweet]
+             [arts:tweetSender (resource-uri "twitter-accounts" screen-name)]
+             [arts:content text]]))))
 
 (defn mentions-template
   [tweet {:keys [name screen_name id]}]
@@ -28,11 +40,12 @@
     (concat
      (graph twitter-account-graph-uri
             [(resource-uri "twitter-accounts" recipient-screen-name)
+             [rdf:a arts:TwitterAccount]
              [foaf:accountName recipient-screen-name]
              [foaf:nick recipient-name]])
      
      (graph tweet-graph-uri
             [(tweet-uri creator created-at content)
+             [rdf:a arts:Tweet]
              [arts:tweetSender (resource-uri "twitter-accounts" creator)]
-             [arts:content content]
              [arts:mentions recipient-screen-name]]))))

@@ -1,7 +1,10 @@
 (ns artsapi-graft.pipeline
   (:require [grafter.tabular :refer :all]
             [artsapi-graft.store :refer :all]
-            [artsapi-graft.templates.email :refer :all]))
+            [artsapi-graft.templates.email :refer :all]
+            [artsapi-graft.templates.twitter :refer :all]
+            [artsapi-graft.twitter :as tweet :refer [get-mentions
+                                                     get-tweets-from-archive]]))
 
 (defn get-sender-email-ds
   [messages]
@@ -16,18 +19,33 @@
   [messages]
   (mapcat (fn [msg]
             (mapcat to-email-template (msg :to)))
-       messages))
+          messages))
 
 (defn cc-field-pipeline
   [messages]
   (mapcat (fn [msg]
             (mapcat cc-email-template (msg :cc)))
-       messages))
+          messages))
 
 (defn email-pipeline
   [store]
   (let [messages (->> [:default "inbox" "sent"] (get-all-messages store))]
     (lazy-cat (sender-pipeline messages)
-         (to-field-pipeline messages)
-         (cc-field-pipeline messages))))
+              (to-field-pipeline messages)
+              (cc-field-pipeline messages))))
 
+(defn tweet-sender-pipeline
+  [tweets]
+  (mapcat #(tweet-template %) tweets))
+
+(defn mentions-pipeline
+  [tweets]
+  (mapcat (fn [tweet]
+            (mapcat mentions-template (tweet/get-mentions tweet)))
+          tweets))
+
+(defn twitter-pipeline
+  [tweet-directory]
+  (let [tweets (get-tweets-from-archive tweet-directory)]
+    (lazy-cat (tweet-sender-pipeline tweets)
+              (mentions-pipeline tweets))))

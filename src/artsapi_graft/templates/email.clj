@@ -19,6 +19,7 @@
             (graph email-graph-uri
                    [(email-uri from sent-date subject)
                     [rdfs:label subject]
+                    [rdf:a arts:Email]
                     [arts:emailSender (resource-uri "people" from)]
                     [arts:emailSubject subject]
                     [arts:hasDomain (resource-uri "domains" from-domain)]
@@ -27,6 +28,7 @@
             (graph person-graph-uri
                    [(resource-uri "people" from)
                     [rdfs:label from-personal]
+                    [rdf:a foaf:Person]
                     [foaf:name from-personal]
                     [vcard:hasEmail from]
                     [foaf:mbox from]
@@ -36,12 +38,14 @@
             (graph organisation-graph-uri
                    [(resource-uri "organisations" from-domain)
                     [rdfs:label from-domain]
+                    [rdf:a org:Organization]
                     [arts:ownsDomain (resource-uri "domains" from-domain)]
                     [org:hasMember (resource-uri "people" from)]])
 
             (graph domain-graph-uri
                    [(resource-uri "domains" from-domain)
                     [rdfs:label from-domain]
+                    [rdf:a arts:Domain]
                     [vcard:hasUrl (str "http://" from-domain)]])))
 
 (defn to-email-template
@@ -55,6 +59,7 @@
    (graph person-graph-uri
           [(resource-uri "people" email)
            [rdfs:label personal]
+           [rdf:a foaf:Person]
            [foaf:name personal]
            [vcard:hasEmail email]
            [foaf:mbox email]
@@ -63,12 +68,14 @@
    (graph organisation-graph-uri
           [(resource-uri "organisations" domain)
            [rdfs:label domain]
+           [rdf:a org:Organization]
            [arts:ownsDomain (resource-uri "domains" domain)]
            [org:hasMember (resource-uri "people" email)]])
 
    (graph domain-graph-uri
           [(resource-uri "domains" domain)
            [rdfs:label domain]
+           [rdf:a arts:Domain]
            [vcard:hasUrl (str "http://" domain)]])))
 
 (defn cc-email-template
@@ -82,6 +89,7 @@
    (graph person-graph-uri
           [(resource-uri "people" email)
            [rdfs:label personal]
+           [rdf:a foaf:Person]
            [foaf:name personal]
            [vcard:hasEmail email]
            [foaf:mbox email]
@@ -90,11 +98,13 @@
    (graph organisation-graph-uri
           [(resource-uri "organisations" domain)
            [rdfs:label domain]
+           [rdf:a org:Organization]
            [arts:ownsDomain (resource-uri "domains" domain)]
            [org:hasMember (resource-uri "people" email)]])
 
    (graph domain-graph-uri
           [(resource-uri "domains" domain)
            [rdfs:label domain]
+           [rdf:a arts:Domain]
            [vcard:hasUrl (str "http://" domain)]])))
 
