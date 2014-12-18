@@ -20,7 +20,7 @@
             [(resource-uri "twitter-accounts" screen-name)
              [rdf:a arts:TwitterAccount]
              [foaf:accountName screen-name]
-             [foaf:nick user]])
+             [foaf:nick name]])
 
      (graph tweet-graph-uri
             [(tweet-uri screen-name created_at text)
@@ -48,4 +48,4 @@
             [(tweet-uri creator created-at content)
              [rdf:a arts:Tweet]
              [arts:tweetSender (resource-uri "twitter-accounts" creator)]
-             [arts:mentions recipient-screen-name]]))))
+             [arts:mentions (resource-uri "twitter-accounts" recipient-screen-name)]]))))

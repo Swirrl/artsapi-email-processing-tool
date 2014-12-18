@@ -41,7 +41,10 @@
 (defn mentions-pipeline
   [tweets]
   (mapcat (fn [tweet]
-            (mapcat mentions-template (tweet/get-mentions tweet)))
+            (when-not (empty? (tweet/get-mentions tweet))
+              (mapcat (fn [mention]
+                        (mentions-template tweet mention))
+                      (tweet/get-mentions tweet))))
           tweets))
 
 (defn twitter-pipeline
