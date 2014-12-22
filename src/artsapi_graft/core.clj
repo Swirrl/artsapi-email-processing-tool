@@ -4,11 +4,17 @@
             [grafter.rdf.sesame :as ses]
             [artsapi-graft.store :as st :refer [store]]))
 
+;; Next we need to get a list of common hosting domains and filter out
+;; the orgs before they get to this point (or maybe here), e.g. we
+;; don't want an org with a domain of gmail.com or hotmail.com
+
 (defn strike-nils
   [quads]
-  (remove (fn [quad] (= "nil" (pr/object quad))) quads))
+  (remove (fn [quad] (or (= "nil" (pr/object quad))
+                        (= "nil.example.com" (pr/object quad))
+                        (= "http://artsapi.co.uk/id/people/nil" (pr/object quad))))
+          quads))
 
-;; TODO: validate quads
 (defn write-to-ttl
   [quads destination]
   (let [validated-quads (strike-nils quads)]
