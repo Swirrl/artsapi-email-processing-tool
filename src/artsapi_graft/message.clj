@@ -14,8 +14,15 @@
   (let [header-field (.getHeader msg header)]
     (when (not= nil header-field)
       (if (> (count header-field) 1)
-        (vec header-field)
+        (lazy-seq header-field)
         (str (get header-field 0))))))
+
+(defn get-to-from-header
+  "Primarily for error recovery in cases of malformed fields.
+   Extracts only the first email address it can and returns
+   that as the correct javamail class."
+  [msg]
+  (conj '() (javax.mail.internet.InternetAddress. (re-find #"^<\S+" (get-header msg "to")))))
 
 (defn get-subject
   [msg]
@@ -30,7 +37,10 @@
 (defn get-to
   "Returns a InternetAddress object of all recipients' addresses, or a set of them."
   [msg]
-  (into #{} (.getRecipients msg Message$RecipientType/TO)))
+  (into #{} (try
+              (.getRecipients msg Message$RecipientType/TO)
+              (catch javax.mail.internet.AddressException e
+                (get-to-from-header msg)))))
 
 (defn get-sent-date
   "Returns a clojure date time instance corresponding to the send date."

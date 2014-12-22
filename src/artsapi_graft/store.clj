@@ -1,5 +1,5 @@
 (ns artsapi-graft.store
-  (:require [artsapi-graft.message :refer [->msg]])
+  (:require [artsapi-graft.message :refer :all])
   (:import [net.fortuna.mstor]
            [java.util Properties]
            [java.io FileInputStream File]
