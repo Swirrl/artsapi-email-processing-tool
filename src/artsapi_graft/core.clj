@@ -11,28 +11,24 @@
 
 (defn in-quad?
   [value quad]
-  (= value
-     (or (pr/subject quad)
-         (pr/predicate quad)
-         (pr/object quad)
+  (or (= value
+         (pr/subject quad))
+      (= value
+         (pr/predicate quad))
+      (= value
+         (pr/object quad))
+      (= value
          (pr/context quad))))
 
 (defn strike-nils
   [quads]
-  (remove (fn [quad] (or (= "nil" (pr/object quad))
+  (remove (fn [quad] (or (in-quad? "nil" quad)
                         (in-quad? "http://artsapi.co.uk/id/organisations/nil-example-com" quad)
                         (in-quad? "http://artsapi.co.uk/id/domains/nil-example-com" quad)
                         (in-quad? "http://artsapi.co.uk/id/people/nil" quad)
-                        (= "http://artsapi.co.uk/id/people/nil" (pr/object quad))
-                        (= "http://artsapi.co.uk/id/domains/nil-example-com" (pr/object quad))
-                        (= "http://artsapi.co.uk/id/organisations/nil-example-com" (pr/object quad))
                         (in-quad? "http://artsapi.co.uk/id/people/undisclosed-recipients:;" quad)
-                        (= "undisclosed-recipients:;"
-                           (pr/object quad))
-                        (= "nil.example.com"
-                           (pr/object quad))
-                        (= "http://nil.example.com"
-                           (pr/object quad))))
+                        (in-quad? "nil.example.com" quad)
+                        (in-quad? "http://nil.example.com" quad)))
           quads))
 
 (defn write-to-ttl
