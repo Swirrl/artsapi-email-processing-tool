@@ -13,7 +13,6 @@
   [address]
   (str "mailto:" address))
 
-
 (defn catch-nil->s
   "The s function, with the ability to represent nil as a string when used with arity of 1."
   [str]
@@ -26,10 +25,10 @@
 
             (graph email-graph-uri
                    [(email-uri from sent-date subject)
-                    ;;[rdfs:label subject]
+                    ;;[rdfs:label (s subject)]
                     [rdf:a arts:Email]
                     [arts:emailSender (resource-uri "people" from)]
-                    ;;[arts:emailSubject subject]
+                    ;;[arts:emailSubject (s subject)]
                     [arts:hasDomain (resource-uri "domains" from-domain)]
                     [arts:sentAt (s sent-date)]])
 

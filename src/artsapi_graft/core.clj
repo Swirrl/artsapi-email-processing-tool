@@ -1,6 +1,7 @@
 (ns artsapi-graft.core
   (:require [grafter.rdf.protocols :as pr]
             [artsapi-graft.pipeline :refer :all]
+            [grafter.rdf :as rdf]
             [grafter.rdf.sesame :as ses]
             [artsapi-graft.store :as st :refer [store]]))
 
@@ -8,11 +9,30 @@
 ;; the orgs before they get to this point (or maybe here), e.g. we
 ;; don't want an org with a domain of gmail.com or hotmail.com
 
+(defn in-quad?
+  [value quad]
+  (= value
+     (or (pr/subject quad)
+         (pr/predicate quad)
+         (pr/object quad)
+         (pr/context quad))))
+
 (defn strike-nils
   [quads]
   (remove (fn [quad] (or (= "nil" (pr/object quad))
-                        (= "nil.example.com" (pr/object quad))
-                        (= "http://artsapi.co.uk/id/people/nil" (pr/object quad))))
+                        (in-quad? "http://artsapi.co.uk/id/organisations/nil-example-com" quad)
+                        (in-quad? "http://artsapi.co.uk/id/domains/nil-example-com" quad)
+                        (in-quad? "http://artsapi.co.uk/id/people/nil" quad)
+                        (= "http://artsapi.co.uk/id/people/nil" (pr/object quad))
+                        (= "http://artsapi.co.uk/id/domains/nil-example-com" (pr/object quad))
+                        (= "http://artsapi.co.uk/id/organisations/nil-example-com" (pr/object quad))
+                        (in-quad? "http://artsapi.co.uk/id/people/undisclosed-recipients:;" quad)
+                        (= "undisclosed-recipients:;"
+                           (pr/object quad))
+                        (= "nil.example.com"
+                           (pr/object quad))
+                        (= "http://nil.example.com"
+                           (pr/object quad))))
           quads))
 
 (defn write-to-ttl
