@@ -124,9 +124,7 @@
         date (sent-date->str msg)
         subj (get-subject msg)
         email-resource-uri (email-uri from-str date subj)]
-    {:from (if-not (nil? from-str)
-             from-str
-             "nil")
+    {:from (or from-str "nil")
      :from-personal (get-personal sender)
      :from-domain (get-domain sender)
      :sent-date date
