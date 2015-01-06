@@ -11,14 +11,12 @@
 
 (defn in-quad?
   [value quad]
-  (or (= value
-         (pr/subject quad))
-      (= value
-         (pr/predicate quad))
-      (= value
-         (pr/object quad))
-      (= value
-         (pr/context quad))))
+  (some true?
+        (map #(= value %)
+             [(pr/subject quad)
+              (pr/predicate quad)
+              (pr/object quad)
+              (pr/context quad)])))
 
 (defn strike-nils
   [quads]
