@@ -20,7 +20,8 @@
             [(resource-uri "twitter-accounts" screen-name)
              [rdf:a arts:TwitterAccount]
              [foaf:accountName (s screen-name)]
-             [foaf:nick (s name)]])
+             [foaf:nick (s name)]
+             [vcard:hasUrl (s (str "http://twitter.com/" screen-name))]])
 
      (graph tweet-graph-uri
             [(tweet-uri screen-name created_at text)
