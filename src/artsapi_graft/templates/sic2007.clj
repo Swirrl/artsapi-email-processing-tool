@@ -18,15 +18,15 @@
 
 (def sic (prefixer "http://swirrl.com/def/sic/"))
 
-(def sic:section (sic "section"))
+(def sic:Section (sic "Section"))
 
-(def sic:division (sic "division"))
+(def sic:Division (sic "Division"))
 
-(def sic:group (sic "group"))
+(def sic:Group (sic "Group"))
 
-(def sic:class (sic "class"))
+(def sic:Class (sic "Class"))
 
-(def sic:sub-class (sic "subclass"))
+(def sic:SubClass (sic "SubClass"))
 
 (def sic:code (sic "code"))
 
@@ -60,11 +60,11 @@
                      (not-nil? sub-class) (uriify-sic-code sub-class)
                      :else "nil")
                     [rdf:a (cond
-                            (not-nil? section) sic:section
-                            (not-nil? division) sic:division
-                            (not-nil? group) sic:group
-                            (not-nil? class) sic:class
-                            (not-nil? sub-class) sic:sub-class
+                            (not-nil? section) sic:Section
+                            (not-nil? division) sic:Division
+                            (not-nil? group) sic:Group
+                            (not-nil? class) sic:Class
+                            (not-nil? sub-class) sic:SubClass
                             :else "nil")]
                     [rdfs:label (cond
                                  (not-nil? section) (s section-label)

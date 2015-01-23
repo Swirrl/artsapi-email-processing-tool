@@ -1,0 +1,73 @@
+@prefix rdf:        <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:       <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:        <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:        <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
+@prefix foaf:       <http://xmlns.com/foaf/0.1/> .
+@prefix dct:        <http://purl.org/dc/terms/> .
+@prefix gr:         <http://purl.org/goodrelations/v1#> .
+@prefix owlTime:    <http://www.w3.org/2006/time#> .
+@prefix org:        <http://www.w3.org/ns/org#> .
+@prefix vcard:      <http://www.w3.org/2006/vcard/ns#> .
+@prefix prov:       <http://www.w3.org/ns/prov#> .
+@prefix sioc:       <http://rdfs.org/sioc/ns#> . # for follows and has_subscriber
+@prefix sic:       <http://swirrl.com/def/sic/> .
+
+# Ontology metadata
+#---------------------------------------------------------
+
+sic:ontology a owl:Ontology;
+
+    rdfs:label "SIC 2007 ontology"@en;
+    rdfs:comment "Vocabulary for describing the UK 2007 Standard Industry Classifications."@en;
+    dct:created "2015-01-23"^^xsd:date;
+    dct:title "SIC 2007 ontology"@en;
+    dct:contributor [foaf:mbox "alex@swirrl.com"; foaf:name "Alex Lynham"];
+    dct:licence <http://www.opendatacommons.org/licenses/pddl/1.0/>;
+    .
+
+# Core classes
+#---------------------------------------------------------
+
+sic:Section a owl:Class, rdfs:Class;
+    rdfs:label "An SIC Section"@en;
+    rdfs:comment "A top-level tier in the SIC hierarchy. Comes as a letter of the alphabet, e.g. A"@en;
+    rdfs:isDefinedBy sic:ontology;
+    .
+
+sic:Division a owl:Class, rdfs:Class;
+    rdfs:label "An SIC Division"@en;
+    rdfs:comment "A second-level tier in the SIC hierarchy. Comes as two numbers, e.g. 01"@en;
+    rdfs:isDefinedBy sic:ontology;
+    skos:broader sic:Section;
+    .
+
+sic:Group a owl:Class, rdfs:Class;
+    rdfs:label "An SIC Group."@en;
+    rdfs:comment "A third-level tier in the SIC hierarchy. Comes as three numbers with a decimal point, e.g. 01.1"@en;
+    rdfs:isDefinedBy sic:ontology;
+    skos:broader sic:Division;
+    .
+
+sic:Class a owl:Class, rdfs:Class;
+    rdfs:label "An SIC Class"@en;
+    rdfs:comment "A fourth-level tier in the SIC hierarchy. Comes as four numbers with a decimal point, e.g. 01.11"@en;
+    rdfs:isDefinedBy sic:ontology;
+    skos:broader sic:Group;
+    .
+
+sic:SubClass a owl:Class, rdfs:Class;
+    rdfs:label "An SIC SubClass"@en;
+    rdfs:comment "A fifth-level tier in the SIC hierarchy. Comes as five numbers with a decimal point and foward slash, e.g. 01.62/1"@en;
+    rdfs:isDefinedBy sic:ontology;
+    skos:broader sic:Class;
+    .
+
+# Properties and relationships
+#---------------------------------------------------------
+
+sic:code a owl:ObjectProperty, rdf:Property;
+    rdfs:label "SIC code"@en;
+    rdfs:comment "The actual SIC 2007 code for this resource, including punctuation like decimal points and forward-slashes where appropriate, as opposed to the escaped versions used for resource URIs. This maps directly to the ONS resource code."@en;
+    rdfs:isDefinedBy sic:ontology;
+    .
