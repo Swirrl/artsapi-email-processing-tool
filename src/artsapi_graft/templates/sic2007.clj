@@ -12,11 +12,11 @@
 
 ;; we need a graph uri and a prefixer, plus some ontology temrs and we don't want to include all the arts api boilerplate
 
-(def sic-graph-uri "http://publishmydata.com/graph/sic")
+(def sic-graph-uri "http://swirrl.com/graph/sic")
 
 ;; ontology
 
-(def sic (prefixer "http://publishmydata.com/def/sic/"))
+(def sic (prefixer "http://swirrl.com/def/sic/"))
 
 (def sic:section (sic "section"))
 
@@ -32,7 +32,7 @@
 
 ;; resource prefixer
 
-(def sic-resource (prefixer "http://publishmydata.com/id/sic/"))
+(def sic-resource (prefixer "http://swirrl.com/id/sic/"))
 
 (defn catch-nil->s
   "The s function, with the ability to represent nil as a string when used with arity of 1."
