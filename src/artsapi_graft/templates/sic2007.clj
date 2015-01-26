@@ -1,5 +1,6 @@
 (ns artsapi-graft.templates.sic
   (:require [grafter.tabular :refer :all]
+            [grafter.rdf.templater :refer :all]
             [grafter.rdf :refer :all]
             [grafter.rdf.ontologies.rdf :refer :all]
             [artsapi-graft.core :refer [write-to-ttl strike-nils]]))
