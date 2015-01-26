@@ -12,6 +12,8 @@ In the `doc` folder, there is an ontology and RDF resources that correspond to t
 
 ## Usage
 
+Use `lein run <path-to-emails-or-twitter> <destination.ttl>` to convert Email or Twitter data. The tool expects you to pass it an absolute path to an mbox file, or the JavaScript `tweet` folder of a Twitter dump. From the root of a Twitter dump, this directory may be found at `./data/js/tweets`.
+
 TODO
 
 ## License

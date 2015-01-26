@@ -1,5 +1,6 @@
 (ns artsapi-graft.templates.twitter
   (:require [grafter.tabular :refer :all]
+            [grafter.rdf.templater :refer :all]
             [grafter.rdf :refer :all]
             [grafter.rdf.ontologies.rdf :refer :all]
             [grafter.rdf.ontologies.org :refer :all]

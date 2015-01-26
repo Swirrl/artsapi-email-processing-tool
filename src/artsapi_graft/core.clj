@@ -2,7 +2,7 @@
   (:require [grafter.rdf.protocols :as pr]
             [artsapi-graft.pipeline :refer :all]
             [grafter.rdf :as rdf]
-            [grafter.rdf.sesame :as ses]
+            [grafter.rdf.io :as io]
             [artsapi-graft.store :as st :refer [store]]))
 
 ;; Next we need to get a list of common hosting domains and filter out
@@ -32,7 +32,7 @@
 (defn write-to-ttl
   [quads destination]
   (let [validated-quads (strike-nils quads)]
-    (pr/add (ses/rdf-serializer destination) validated-quads)))
+    (pr/add (io/rdf-serializer destination) validated-quads)))
 
 (defn init-store [path]
   (st/store path))
