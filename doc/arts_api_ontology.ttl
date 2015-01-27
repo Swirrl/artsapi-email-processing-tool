@@ -50,6 +50,34 @@ arts:EmailAccount a owl:Class, rdfs:Class;
     rdfs:subClassOf foaf:OnlineAccount;
     .
 
+arts:LinkedInAccount a owl:Class, rdfs:Class;
+    rdfs:label "An account on LinkedIn "@en;
+    rdfs:comment "Represents a user LinkedIn account."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:OnlineAccount;
+    .
+
+arts:LinkedInRecommendation a owl:Class, rdfs:Class;
+    rdfs:label "A recommendation created by or received by a user on the networking service LinkedIn."@en;
+    rdfs:comment "Represents a written recommendation given on LinkedIn by one user to another."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:Document, owl:Thing;
+    .
+
+arts:LinkedInEndorsement a owl:Class, rdfs:Class;
+    rdfs:label "A endorsement created by or received by a user on the networking service LinkedIn."@en;
+    rdfs:comment "Once a user has posted a skill on their LinkedIn profile, other users may publicly endorse it. A LinkedIn endorsement is a document representing the connexion that takes place as a result of this activity."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:Document, owl:Thing;
+    .
+
+arts:LinkedInSkill a owl:Class, rdfs:Class;
+    rdfs:label "A skill specified by a user on their LinkedIn profile."@en;
+    rdfs:comment "A skill specified by a user on their LinkedIn profile. Once published, other users can endorse the skill publicly."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subClassOf foaf:Document, owl:Thing;
+    .
+
 arts:Message a owl:Class, rdfs:Class;
     rdfs:label "A Message"@en;
     rdfs:comment "Represents a message directly transmitted between two or more foaf:OnlineAccounts, appropriate subclasses or other messaging resources or identifiers. A message, unlike a Post, is directed."@en;
@@ -110,6 +138,20 @@ arts:workedOn a owl:ObjectProperty, rdf:Property;
     rdfs:range foaf:Project;
     .
 
+arts:linkedInProfileName a owl:ObjectProperty, rdf:Property;
+    rdfs:label "LinkedIn profile name"@en;
+    rdfs:comment "Indicates the name this user has given as their real name on LinkedIn."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    .
+
+arts:hasLinkedInSkill a owl:ObjectProperty, rdf:Property;
+    rdfs:label "LinkedIn Skill"@en;
+    rdfs:comment "Indicates a skill that a LinkedIn user has specified on their user profile page, or a skill that has been specified in an Endorsement."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:range arts:LinkedInSkill;
+    .
+
 arts:sender a owl:ObjectProperty, rdf:Property;
     rdfs:label "Sender"@en;
     rdfs:comment "Indicates that something (a subclass of owl:Thing) has been sent by the object of this triple. The object might be a discrete foaf:Person, Agent or mailto:URI, for example."@en;
@@ -135,6 +177,13 @@ arts:emailSender a owl:ObjectProperty, rdf:Property;
 arts:sentAt a owl:ObjectProperty, rdf:Property;
     rdfs:label "Sent at"@en;
     rdfs:comment "A timestamp to specify when a Thing was sent."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:range xsd:dateTime;
+    .
+
+arts:receivedAt a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Sent at"@en;
+    rdfs:comment "A timestamp to specify when a Thing was received."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:range xsd:dateTime;
     .
@@ -178,6 +227,38 @@ arts:ccRecipient a owl:ObjectProperty, rdf:Property;
     rdfs:comment "Indicates a email address or reference to a Person CC'd on a sent email message."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:domain arts:Email;
+    rdfs:subPropertyOf arts:recipient;
+    .
+
+arts:recommender a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Recommender"@en;
+    rdfs:comment "Indicates the creator of a recommendation."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    rdfs:subPropertyOf arts:sender;
+    .
+
+arts:recommendee a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Recommendee"@en;
+    rdfs:comment "Indicates the recipient of a recommendation."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    rdfs:subPropertyOf arts:recipient;
+    .
+
+arts:endorser a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Endorser"@en;
+    rdfs:comment "Indicates the creator of an endorsement."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    rdfs:subPropertyOf arts:sender;
+    .
+
+arts:endorsee a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Endorsee"@en;
+    rdfs:comment "Indicates the recipient of an endorsement."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
     rdfs:subPropertyOf arts:recipient;
     .
 

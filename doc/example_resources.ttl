@@ -26,13 +26,37 @@
   arts:mentions "@swirrl";
   .
 
+# /graph/endorsements
+# /id/endorsements/:endorsement
+# e.g. /id/endorsements/<hash-goes-here>
+
+<endorsement> a arts:LinkedInEndorsement;
+  arts:hasLinkedInSkill </id/linkedin-skill/writing-ontologies>; # the skill being endorsed
+  arts:endorser </id/people/jango-fett-swirrl-com>; # this will be a name, which we will have to look up as the arts:linkedInProfileName listed against a known Person. There may be a more foolproof way of doing this.
+  arts:endorsee </id/people/alex-swirrl-com>; # this will be a name, which we will have to look up as the arts:linkedInProfileName listed against a known Person. There may be a more foolproof way of doing this.
+  arts:receivedAt ""^^xsd:dateTime;
+  .
+
+# /graph/recommendations
+# /id/recommendations/:recommendation
+# e.g. /id/recommendations/<hash-goes-here>
+
+<tweet> a arts:LinkedInRecommendation;
+  arts:recommender </id/people/jango-fett-swirrl-com>; # this will be a name, which we will have to look up as the arts:linkedInProfileName listed against a known Person. There may be a more foolproof way of doing this.
+  arts:recommendee </id/people/alex-swirrl-com>; # this will be a name, which we will have to look up as the arts:linkedInProfileName listed against a known Person. There may be a more foolproof way of doing this.
+  arts:receivedAt ""^^xsd:dateTime;
+  .
+
 # /graph/people
 # /id/people/:person
 
 <person> a foaf:Person;
   foaf:account </id/twitter-accounts/hipsters_unite>;
   foaf:account </id/email-accounts/alex-swirrl-com>;
-  foaf:name "Alex Lynham";
+  foaf:account </id/email-accounts/alex-his-second-email-com>; # see line 93
+  foaf:account </id/linkedin-accounts/alex-swirrl-com>;
+  foaf:name "Alex Lynham"; 
+  arts:linkedInProfileName "Alex Lynham"; # this should be from LinkedIn (ln 90) if available as it means you can reference from endorsements and recommendations
   foaf:givenName "Alex";
   foaf:familyName "Lynham";
   foaf:knows </id/people/robin-infonomics-ltd-uk>;
@@ -56,6 +80,26 @@
 <emailaccount> a arts:EmailAccount;
   foaf:accountName "Alex Lynham"; # the 'Personal' metadata; may be blank
   vcard:hasEmail "alex@swirrl.com"; # NB an arts:emailSender should be a subclass of foaf:Agent
+  .
+
+# /graph/linkedin-accounts
+# /id/linkedin-accounts/:account
+# this is included for the sake of symmetry, but is not key to the ontology.
+
+<linkedinaccount> a arts:LinkedInAccount;
+  foaf:accountName "Alex Lynham";
+  foaf:name "Alex Lynham";
+  vcard:hasEmail "alex@swirrl.com";
+  vcard:hasEmail "alex@his-second-email.com";
+  arts:hasLinkedInSkill </id/linkedin-skill/writing-ontologies>;
+  .
+
+# /graph/linkedin-skills
+# /id/linkedin-skills/:linkedin-skill
+# e.g. /id/linkedin-skills/<hash-goes-here>
+
+<linkedinskill> a arts:LinkedInSkill;
+  rdfs:label "Writing ontologies";
   .
 
 # /graph/organisations
