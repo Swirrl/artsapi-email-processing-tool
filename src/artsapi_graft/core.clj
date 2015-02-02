@@ -2,8 +2,8 @@
   (:require [grafter.rdf.protocols :as pr]
             [artsapi-graft.pipeline :refer :all]
             [grafter.rdf :as rdf]
-            [grafter.rdf.io :as io]
-            [artsapi-graft.store :as st :refer [store]]))
+            [grafter.rdf.io :as io])
+  (:gen-class))
 
 ;; Next we need to get a list of common hosting domains and filter out
 ;; the orgs before they get to this point (or maybe here), e.g. we
@@ -34,9 +34,6 @@
   (let [validated-quads (strike-nils quads)]
     (pr/add (io/rdf-serializer destination) validated-quads)))
 
-(defn init-store [path]
-  (st/store path))
-
 (defn pipeline-dispatcher
   "Check the format of the input path and work out what to do.
    This is very unscientific at present and will need updating.
@@ -48,8 +45,9 @@
   [path]
   (cond
     (re-find #"tweets\z" path) (twitter-pipeline path)
-    (re-find #"mbox\z" path) (email-pipeline (init-store path))))
+    (re-find #"mbox\z" path) (email-pipeline path)))
 
 (defn -main [path output]
   (-> (pipeline-dispatcher path)
       (write-to-ttl output)))
+

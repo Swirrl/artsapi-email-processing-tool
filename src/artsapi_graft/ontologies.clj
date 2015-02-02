@@ -1,6 +1,8 @@
 (ns artsapi-graft.ontologies
   (:require [grafter.rdf.ontologies.util :refer :all]))
 
+;; classes
+
 (def arts-domain (prefixer "http://artsapi.co.uk/"))
 
 (def arts (prefixer "http://artsapi.co.uk/def/arts/"))
@@ -11,6 +13,14 @@
 
 (def arts:EmailAccount (arts "EmailAccount"))
 
+(def arts:LinkedInAccount (arts "LinkedInAccount"))
+
+(def arts:LinkedInRecommendation (arts "LinkedInRecommendation"))
+
+(def arts:LinkedInEndorsement (arts "LinkedInEndorsement"))
+
+(def arts:LinkedInSkill (arts "LinkedInSkill"))
+
 (def arts:Message (arts "Message"))
 
 (def arts:Post (arts "Post"))
@@ -18,6 +28,8 @@
 (def arts:Tweet (arts "Tweet"))
 
 (def arts:Email (arts "Email"))
+
+;; properties
 
 (def arts:ownsDomain (arts "ownsDomain"))
 
@@ -27,6 +39,10 @@
 
 (def arts:workedOn (arts "workedOn"))
 
+(def arts:linkedInProfileName (arts "linkedInProfileName"))
+
+(def arts:hasLinkedInSkill (arts "hasLinkedInSkill"))
+
 (def arts:sender (arts "sender"))
 
 (def arts:tweetSender (arts "tweetSender"))
@@ -34,6 +50,8 @@
 (def arts:emailSender (arts "emailSender"))
 
 (def arts:sentAt (arts "sentAt"))
+
+(def arts:receivedAt (arts "receivedAt"))
 
 (def arts:subject (arts "subject"))
 
@@ -46,6 +64,14 @@
 (def arts:emailRecipient (arts "emailRecipient"))
 
 (def arts:ccRecipient (arts "ccRecipient"))
+
+(def arts:recommender (arts "recommender"))
+
+(def arts:recommendee (arts "recommendee"))
+
+(def arts:endorser (arts "endorser"))
+
+(def arts:endorsee (arts "endorsee"))
 
 (def arts:mentions (arts "mentions"))
 
