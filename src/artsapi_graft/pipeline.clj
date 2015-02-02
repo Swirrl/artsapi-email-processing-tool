@@ -1,7 +1,8 @@
 (ns artsapi-graft.pipeline
   (:require [grafter.tabular :refer :all]
             [artsapi-graft.store :refer :all]
-            [artsapi-graft.io :as io]
+            [artsapi-graft.linkedin :refer :all]
+            [artsapi-graft.templates.linkedin :refer :all]
             [artsapi-graft.templates.email :refer :all]
             [artsapi-graft.templates.twitter :refer :all]
             [artsapi-graft.twitter :as tweet :refer [get-mentions
@@ -58,34 +59,38 @@
     (lazy-cat (tweet-sender-pipeline tweets)
               (mentions-pipeline tweets))))
 
-(defn filter-csv
-  "A helper function that looks in a directory
-   and only returns .csv files that match the regex passed in."
-  [dir regex]
-  (->> (io/open-file-directory dir)
-       (filter #(re-find regex %))))
-
 (defpipe linkedin-connections-pipeline
-  [path-to-directory]
-  (let [file (filter-csv path-to-directory #"Connections.csv\z")]
-    (connections-template file)))
+  [path-to-directory emails]
+  (let [file (first (filter-csv path-to-directory #"Connections\.csv\z"))]
+    (connections-template (read-csv file))))
 
 (defpipe linkedin-endorsements-pipeline
-  [path-to-directory])
+  [path-to-directory emails]
+  (let [file (first (filter-csv path-to-directory #"Endorsement Info\.csv\z"))]
+    (endorsements-template (read-csv file))))
 
 (defpipe linkedin-recommendations-pipeline
-  [path-to-directory])
+  [path-to-directory emails]
+  (let [files (filter-csv path-to-directory #"Recommendations.+\.csv\z")]
+    (mapcat (fn [file]
+              (recommendations-template (read-csv file)))
+            files)))
 
 (defpipe linkedin-skills-pipeline
-  [path-to-directory])
+  [path-to-directory emails]
+  (let [file (first (filter-csv path-to-directory #"\ASkills\.csv\z"))]
+    (skills-template (read-csv file))))
 
 (defpipe linkedin-ad-targeting-pipeline
-  [path-to-directory])
+  [path-to-directory emails]
+  (let [file (first (filter-csv path-to-directory #"Ad Targeting\.csv\z"))]
+    (ad-targeting-template (read-csv file))))
 
 (defn linkedin-pipeline
   [path-to-directory]
-  (lazy-cat (linkedin-connections-pipeline path-to-directory)
-            (linkedin-endorsements-pipeline path-to-directory)
-            (linkedin-recommendations-pipeline path-to-directory)
-            (linkedin-skills-pipeline path-to-directory)
-            (linkedin-ad-targeting-pipeline path-to-directory)))
+  (let [emails (get-linkedin-email-addresses path-to-directory)] 
+    (lazy-cat (linkedin-connections-pipeline path-to-directory emails)
+              (linkedin-endorsements-pipeline path-to-directory emails)
+              (linkedin-recommendations-pipeline path-to-directory emails)
+              (linkedin-skills-pipeline path-to-directory emails)
+              (linkedin-ad-targeting-pipeline path-to-directory emails))))
