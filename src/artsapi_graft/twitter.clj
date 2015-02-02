@@ -1,5 +1,6 @@
 (ns artsapi-graft.twitter
-  (:require [artsapi-graft.json :refer :all]))
+  (:require [artsapi-graft.json :refer :all]
+            [artsapi-graft.io :refer io]))
 
 (defn get-tweets-map-from
   "Returns a lazy sequence of maps. Each map represents a tweet"
@@ -52,7 +53,7 @@
    We want to get all the js files so we can snip off line one
    and get at the sweet, sweet JSON inside."
   [path-to-directory]
-  (->> (open-file-directory path-to-directory)
+  (->> (io/open-file-directory path-to-directory)
        (filter #(re-find #"\.js\z" %))))
 
 (defn archive->lazy-seq

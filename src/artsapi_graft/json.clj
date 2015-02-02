@@ -2,11 +2,6 @@
   (:require [clojure.java.io :as io]
             [cheshire.core :refer :all]))
 
-(defn open-file-directory
-  [path-to-directory]
-  (->> (.listFiles (io/file path-to-directory))
-       (map #(.getAbsolutePath %))))
-
 (defn read-whole-file
   [file-path]
   (with-open [reader (io/reader file-path)]

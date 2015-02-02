@@ -1,6 +1,7 @@
 (ns artsapi-graft.pipeline
   (:require [grafter.tabular :refer :all]
             [artsapi-graft.store :refer :all]
+            [artsapi-graft.io :as io]
             [artsapi-graft.templates.email :refer :all]
             [artsapi-graft.templates.twitter :refer :all]
             [artsapi-graft.twitter :as tweet :refer [get-mentions
@@ -57,8 +58,17 @@
     (lazy-cat (tweet-sender-pipeline tweets)
               (mentions-pipeline tweets))))
 
+(defn filter-csv
+  "A helper function that looks in a directory
+   and only returns .csv files that match the regex passed in."
+  [dir regex]
+  (->> (io/open-file-directory dir)
+       (filter #(re-find regex %))))
+
 (defpipe linkedin-connections-pipeline
-  [path-to-directory])
+  [path-to-directory]
+  (let [file (filter-csv path-to-directory #"Connections.csv\z")]
+    (connections-template file)))
 
 (defpipe linkedin-endorsements-pipeline
   [path-to-directory])
@@ -73,4 +83,9 @@
   [path-to-directory])
 
 (defn linkedin-pipeline
-  [])
+  [path-to-directory]
+  (lazy-cat (linkedin-connections-pipeline path-to-directory)
+            (linkedin-endorsements-pipeline path-to-directory)
+            (linkedin-recommendations-pipeline path-to-directory)
+            (linkedin-skills-pipeline path-to-directory)
+            (linkedin-ad-targeting-pipeline path-to-directory)))
