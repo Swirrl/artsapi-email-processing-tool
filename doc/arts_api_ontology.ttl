@@ -109,6 +109,12 @@ arts:Email a owl:Class, rdfs:Class;
 # Properties and relationships
 #---------------------------------------------------------
 
+arts:connection a owl:ObjectProperty, rdf:Property;
+    rdfs:label "A connection"@en;
+    rdfs:comment "Indicates a connection between two foaf:Person resources or two Organisations. A connection is defined as TODO."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
 arts:ownsDomain a owl:ObjectProperty, rdf:Property;
     rdfs:label "Owns domain"@en;
     rdfs:comment "Indicates a web domain that is owned by an Organization."@en;
