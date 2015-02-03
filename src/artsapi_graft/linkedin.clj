@@ -21,4 +21,7 @@
   (let [file (first (filter-csv path-to-directory #"Email Addresses\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        (columns [0]))))
+        (columns [0])
+        :rows
+        ((partial map #(% "a")))
+        lazy-seq)))
