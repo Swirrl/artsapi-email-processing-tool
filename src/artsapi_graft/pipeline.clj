@@ -64,44 +64,44 @@
   (let [file (first (filter-csv path-to-directory #"Connections\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        connections-template)))
+        )))
 
 (defpipe linkedin-endorsements-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Endorsement Info\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        endorsements-template)))
+        )))
 
 (defpipe linkedin-recommendations-given-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Recommendations Given\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        recommendations-given-template)))
+        )))
 
 (defpipe linkedin-recommendations-received-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Recommendations Received\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        recommendations-received-template)))
+        )))
 
 (defpipe linkedin-skills-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Skills\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        skills-template)))
+        )))
 
 (defpipe linkedin-ad-targeting-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Ad Targeting\.csv\z"))]
     (-> (read-csv file)
         (drop-rows 1)
-        ad-targeting-template)))
+        )))
 
-(defn linkedin-pipeline
+(defn linkedin->quads
   [path-to-directory]
   (let [emails (get-linkedin-email-addresses path-to-directory)] 
     (lazy-cat (linkedin-connections-pipeline path-to-directory emails)

@@ -8,7 +8,7 @@
             [artsapi-graft.ontologies :refer :all]
             [artsapi-graft.prefixers :refer :all]))
 
-(defgraft connections-template
+(def connections-template
   (graph-fn [[first-name last-name email-address current-company current-position]]
             (graph person-graph-uri
                    [(resource-uri "people" email-address)
@@ -20,18 +20,32 @@
                     [arts:position (s current-position)]
                     [arts:connection ]])))
 
-(defgraft endorsements-template
+(def endorsements-template
   (graph-fn [[endorsement-date skill-name endorser-first-name endorser-last-name]]
             (graph )))
 
-(defgraft recommendations-given-template
+(def recommendations-given-template
   (graph-fn [[recommendation-date recommendee-first-name recommendee-last-name]]))
 
-(defgraft recommendations-received-template
+(def recommendations-received-template
   (graph-fn [[recommendation-date recommender-first-name recommender-last-name]]))
 
-(defgraft skills-template
+(def skills-template
   (graph-fn [[skill]]))
 
-(defgraft ad-targeting-template
+(def ad-targeting-template
   (graph-fn [[age-group country company-sizes companies followed-companies functions gender industries followed-industries partner-ads seniorities state zip code schools graduation-year groups language degree-classes skills]]))
+
+;; here be defgrafts
+
+(defgraft linkedin-connections-graft)
+
+(defgraft linkedin-endorsements-graft)
+
+(defgraft linkedin-recommendations-given-graft)
+
+(defgraft linkedin-recommendations-received-graft)
+
+(defgraft linkedin-skills-graft)
+
+(defgraft linkedin-ad-targeting-graft)
