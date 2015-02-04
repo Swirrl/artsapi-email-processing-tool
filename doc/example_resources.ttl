@@ -96,7 +96,7 @@
 
 # /graph/linkedin-skills
 # /id/linkedin-skills/:linkedin-skill
-# e.g. /id/linkedin-skills/<hash-goes-here>
+# e.g. /id/linkedin-skills/writing-ontologies
 
 <linkedinskill> a arts:LinkedInSkill;
   rdfs:label "Writing ontologies";
