@@ -130,6 +130,13 @@ arts:hasDomain a owl:ObjectProperty, rdf:Property;
     rdfs:range arts:Domain;
     .
 
+arts:position a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Position"@en;
+    rdfs:comment "Indicates the position or role of a foaf:Person in an organisation to which they belong."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    .
+
 arts:worksOn a owl:ObjectProperty, rdf:Property;
     rdfs:label "Works on"@en;
     rdfs:comment "Indicates that work is being done on a Project."@en;

@@ -31,9 +31,13 @@
 
 ;; properties
 
+(def arts:connection (arts "connection"))
+
 (def arts:ownsDomain (arts "ownsDomain"))
 
 (def arts:hasDomain (arts "hasDomain"))
+
+(def arts:position (arts "position"))
 
 (def arts:worksOn (arts "worksOn"))
 

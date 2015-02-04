@@ -32,7 +32,7 @@
             (mapcat cc-email-template (msg :cc)))
           messages))
 
-(defpipe email-pipeline
+(defn email->quads
   [path]
   (let [store (init-store path)] 
     (let [messages (->> [:default "inbox" "sent"] (get-all-messages store))]
@@ -53,7 +53,7 @@
                       (tweet/get-mentions tweet))))
           tweets))
 
-(defpipe twitter-pipeline
+(defn twitter->quads
   [tweet-directory]
   (let [tweets (get-tweets-from-archive tweet-directory)]
     (lazy-cat (tweet-sender-pipeline tweets)
@@ -62,35 +62,51 @@
 (defpipe linkedin-connections-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Connections\.csv\z"))]
-    (connections-template (read-csv file))))
+    (-> (read-csv file)
+        (drop-rows 1)
+        connections-template)))
 
 (defpipe linkedin-endorsements-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Endorsement Info\.csv\z"))]
-    (endorsements-template (read-csv file))))
+    (-> (read-csv file)
+        (drop-rows 1)
+        endorsements-template)))
 
-(defpipe linkedin-recommendations-pipeline
+(defpipe linkedin-recommendations-given-pipeline
   [path-to-directory emails]
-  (let [files (filter-csv path-to-directory #"Recommendations.+\.csv\z")]
-    (mapcat (fn [file]
-              (recommendations-template (read-csv file)))
-            files)))
+  (let [file (first (filter-csv path-to-directory #"Recommendations Given\.csv\z"))]
+    (-> (read-csv file)
+        (drop-rows 1)
+        recommendations-given-template)))
+
+(defpipe linkedin-recommendations-received-pipeline
+  [path-to-directory emails]
+  (let [file (first (filter-csv path-to-directory #"Recommendations Received\.csv\z"))]
+    (-> (read-csv file)
+        (drop-rows 1)
+        recommendations-received-template)))
 
 (defpipe linkedin-skills-pipeline
   [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"\ASkills\.csv\z"))]
-    (skills-template (read-csv file))))
+  (let [file (first (filter-csv path-to-directory #"Skills\.csv\z"))]
+    (-> (read-csv file)
+        (drop-rows 1)
+        skills-template)))
 
 (defpipe linkedin-ad-targeting-pipeline
   [path-to-directory emails]
   (let [file (first (filter-csv path-to-directory #"Ad Targeting\.csv\z"))]
-    (ad-targeting-template (read-csv file))))
+    (-> (read-csv file)
+        (drop-rows 1)
+        ad-targeting-template)))
 
 (defn linkedin-pipeline
   [path-to-directory]
   (let [emails (get-linkedin-email-addresses path-to-directory)] 
     (lazy-cat (linkedin-connections-pipeline path-to-directory emails)
               (linkedin-endorsements-pipeline path-to-directory emails)
-              (linkedin-recommendations-pipeline path-to-directory emails)
+              (linkedin-recommendations-given-pipeline path-to-directory emails)
+              (linkedin-recommendations-received-pipeline path-to-directory emails)
               (linkedin-skills-pipeline path-to-directory emails)
               (linkedin-ad-targeting-pipeline path-to-directory emails))))

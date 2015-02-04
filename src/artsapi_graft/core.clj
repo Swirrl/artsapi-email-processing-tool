@@ -34,7 +34,7 @@
   (let [validated-quads (strike-nils quads)]
     (pr/add (io/rdf-serializer destination) validated-quads)))
 
-(defn pipeline-dispatcher
+(defn dispatcher
   "Check the format of the input path and work out what to do.
    This is very unscientific at present and will need updating.
 
@@ -44,10 +44,10 @@
    far as I know; it comes from a folder with the .mbox suffix."
   [path]
   (cond
-    (re-find #"tweets\z" path) (twitter-pipeline path)
-    (re-find #"mbox\z" path) (email-pipeline path)))
+    (re-find #"tweets\z" path) (twitter->quads path)
+    (re-find #"mbox\z" path) (email->quads path)))
 
 (defn -main [path output]
-  (-> (pipeline-dispatcher path)
+  (-> (dispatcher path)
       (write-to-ttl output)))
 

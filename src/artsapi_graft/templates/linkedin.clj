@@ -8,18 +8,30 @@
             [artsapi-graft.ontologies :refer :all]
             [artsapi-graft.prefixers :refer :all]))
 
-
 (defgraft connections-template
-  (graph-fn [[]]))
+  (graph-fn [[first-name last-name email-address current-company current-position]]
+            (graph person-graph-uri
+                   [(resource-uri "people" email-address)
+                    [rdf:a foaf:Person]
+                    [foaf:givenName (s first-name)]
+                    [foaf:familyName (s last-name)]
+                    [vcard:hasEmail (s email-address)]
+                    [foaf:mbox (s email-address)]
+                    [arts:position (s current-position)]
+                    [arts:connection ]])))
 
 (defgraft endorsements-template
-  (graph-fn [[]]))
+  (graph-fn [[endorsement-date skill-name endorser-first-name endorser-last-name]]
+            (graph )))
 
-(defgraft recommendations-template
-  (graph-fn [[]]))
+(defgraft recommendations-given-template
+  (graph-fn [[recommendation-date recommendee-first-name recommendee-last-name]]))
+
+(defgraft recommendations-received-template
+  (graph-fn [[recommendation-date recommender-first-name recommender-last-name]]))
 
 (defgraft skills-template
-  (graph-fn [[]]))
+  (graph-fn [[skill]]))
 
 (defgraft ad-targeting-template
-  (graph-fn [[]]))
+  (graph-fn [[age-group country company-sizes companies followed-companies functions gender industries followed-industries partner-ads seniorities state zip code schools graduation-year groups language degree-classes skills]]))

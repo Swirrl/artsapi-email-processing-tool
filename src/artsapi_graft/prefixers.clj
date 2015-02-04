@@ -23,6 +23,14 @@
 
 (def email-account-graph-uri (base-graph "email-accounts"))
 
+(def linkedin-account-graph-uri (base-graph "linkedin-accounts"))
+
+(def linkedin-recommendation-graph-uri (base-graph "recommendations"))
+
+(def linkedin-endorsement-graph-uri (base-graph "endorsements"))
+
+(def linkedin-skill-graph-uri (base-graph "linkedin-skills"))
+
 ;; resource uris
 
 (def base-resource-uri (prefixer (arts-domain "id/")))
@@ -42,6 +50,12 @@
   [graph id-string]
   (str (base-resource-uri graph) "/"
        (->slug id-string)))
+
+(defn linkedin-hash
+  [graph timestamp first-name last-name]
+  (->> (str timestamp first-name last-name)
+       digest/md5
+       (resource-uri graph)))
 
 (defn email-uri
   [from sent-at subject]
