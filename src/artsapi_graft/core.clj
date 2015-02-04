@@ -1,6 +1,6 @@
 (ns artsapi-graft.core
   (:require [grafter.rdf.protocols :as pr]
-            [artsapi-graft.pipeline :refer :all]
+            [artsapi-graft.quad-converters :refer :all]
             [grafter.rdf :as rdf]
             [grafter.rdf.io :as io])
   (:gen-class))
