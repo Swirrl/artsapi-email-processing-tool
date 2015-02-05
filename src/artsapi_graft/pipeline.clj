@@ -1,7 +1,6 @@
 (ns artsapi-graft.pipeline
   (:require [grafter.tabular :refer :all]
             [artsapi-graft.linkedin :refer :all]
-            [artsapi-graft.templates.linkedin :refer :all]
             [artsapi-graft.templates.email :refer :all]
             [artsapi-graft.templates.twitter :refer :all]))
 

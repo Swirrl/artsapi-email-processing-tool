@@ -20,13 +20,14 @@
 
 (defn strike-nils
   [quads]
-  (remove (fn [quad] (or (in-quad? "nil" quad)
-                        (in-quad? "http://artsapi.co.uk/id/organisations/nil-example-com" quad)
-                        (in-quad? "http://artsapi.co.uk/id/domains/nil-example-com" quad)
-                        (in-quad? "http://artsapi.co.uk/id/people/nil" quad)
-                        (in-quad? "http://artsapi.co.uk/id/people/undisclosed-recipients:;" quad)
-                        (in-quad? "nil.example.com" quad)
-                        (in-quad? "http://nil.example.com" quad)))
+  (remove (fn [quad]
+            (or (in-quad? "nil" quad)
+                (in-quad? "http://artsapi.co.uk/id/organisations/nil-example-com" quad)
+                (in-quad? "http://artsapi.co.uk/id/domains/nil-example-com" quad)
+                (in-quad? "http://artsapi.co.uk/id/people/nil" quad)
+                (in-quad? "http://artsapi.co.uk/id/people/undisclosed-recipients:;" quad)
+                (in-quad? "nil.example.com" quad)
+                (in-quad? "http://nil.example.com" quad)))
           quads))
 
 (defn write-to-ttl
@@ -45,7 +46,8 @@
   [path]
   (cond
     (re-find #"tweets\z" path) (twitter->quads path)
-    (re-find #"mbox\z" path) (email->quads path)))
+    (re-find #"mbox\z" path) (email->quads path)
+    (re-find #"LinkedInDataExport" path) (linkedin->quads path)))
 
 (defn -main [path output]
   (-> (dispatcher path)
