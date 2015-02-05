@@ -1,5 +1,5 @@
 (ns artsapi-graft.templates.linkedin
-  (:require [clojure.string :as st :refer :all]
+  (:require [clojure.string :as st :refer [join]]
             [grafter.tabular :refer :all]
             [grafter.rdf :refer :all]
             [grafter.rdf.templater :refer :all]
