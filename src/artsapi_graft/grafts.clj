@@ -9,6 +9,11 @@
 
 ;; not strictly grafts
 
+(defn email-sender-pipeline
+  [messages]
+  (-> (get-sender-email-ds messages)
+      (sender-email-template)))
+
 (defn to-field->quads
   [messages]
   (mapcat (fn [msg]
@@ -42,25 +47,25 @@
 ;; now these are the grafts we are looking for
 
 (defgraft linkedin-connections-graft
-  [path-to-directory primary]
-  (linkedin-connections-pipeline path-to-directory primary))
+  linkedin-connections-pipeline
+  connections-template)
 
 (defgraft linkedin-endorsements-graft
-  [path-to-directory primary]
-  (linkedin-endorsements-pipeline path-to-directory primary))
+  linkedin-endorsements-pipeline
+  endorsements-template)
 
 (defgraft linkedin-recommendations-given-graft
-  [path-to-directory primary]
-  (linkedin-recommendations-given-pipeline path-to-directory primary))
+  linkedin-recommendations-given-pipeline
+  recommendations-given-template)
 
 (defgraft linkedin-recommendations-received-graft
-  [path-to-directory primary]
-  (linkedin-recommendations-received-pipeline path-to-directory primary))
+  linkedin-recommendations-received-pipeline
+  recommendations-received-template)
 
 (defgraft linkedin-skills-graft
-  [path-to-directory primary]
-  (linkedin-skills-pipeline path-to-directory primary))
+  linkedin-skills-pipeline
+  skills-template)
 
 (defgraft linkedin-ad-targeting-graft
-  [path-to-directory primary]
-  (linkedin-ad-targeting-pipeline path-to-directory primary))
+  linkedin-ad-targeting-pipeline
+  ad-targeting-template)

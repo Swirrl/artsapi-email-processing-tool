@@ -9,11 +9,6 @@
   [messages]
   (make-dataset messages [:from :from-personal :from-domain :sent-date :subject]))
 
-(defn email-sender-pipeline
-  [messages]
-  (-> (get-sender-email-ds messages)
-      (sender-email-template)))
-
 (defpipe linkedin-connections-pipeline
   [path-to-directory primary]
   (let [file (first (filter-csv path-to-directory

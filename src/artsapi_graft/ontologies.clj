@@ -87,7 +87,13 @@
 
 (def foaf:mbox "http://xmlns.com/foaf/0.1/mbox")
 
+(def foaf:account "http://xmlns.com/foaf/0.1/account")
+
 (def foaf:accountName "http://xmlns.com/foaf/0.1/accountName")
+
+(def foaf:givenName "http://xmlns.com/foaf/0.1/givenName")
+
+(def foaf:familyName "http://xmlns.com/foaf/0.1/familyName")
 
 (def org:memberOf "http://www.w3.org/ns/org#memberOf")
 

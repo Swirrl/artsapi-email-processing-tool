@@ -2,6 +2,7 @@
   (:require [clojure.string :as st :refer :all]
             [grafter.tabular :refer :all]
             [grafter.rdf :refer :all]
+            [grafter.rdf.templater :refer :all]
             [grafter.rdf.ontologies.rdf :refer :all]
             [grafter.rdf.ontologies.org :refer :all]
             [grafter.rdf.ontologies.foaf :refer :all]
