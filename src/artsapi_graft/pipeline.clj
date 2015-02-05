@@ -15,44 +15,38 @@
       (sender-email-template)))
 
 (defpipe linkedin-connections-pipeline
-  [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"Connections\.csv\z"))]
-    (-> (read-csv file)
-        (drop-rows 1)
-        )))
+  [path-to-directory primary]
+  (let [file (first (filter-csv path-to-directory
+                                #"Connections\.csv\z"))]
+    (read-and-add-primary file primary)))
 
 (defpipe linkedin-endorsements-pipeline
-  [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"Endorsement Info\.csv\z"))]
-    (-> (read-csv file)
-        (drop-rows 1)
-        )))
+  [path-to-directory primary]
+  (let [file (first (filter-csv path-to-directory
+                                #"Endorsement Info\.csv\z"))]
+    (read-and-add-primary file primary)))
 
 (defpipe linkedin-recommendations-given-pipeline
-  [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"Recommendations Given\.csv\z"))]
-    (-> (read-csv file)
-        (drop-rows 1)
-        )))
+  [path-to-directory primary]
+  (let [file (first (filter-csv path-to-directory
+                                #"Recommendations Given\.csv\z"))]
+    (read-and-add-primary file primary)))
 
 (defpipe linkedin-recommendations-received-pipeline
-  [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"Recommendations Received\.csv\z"))]
-    (-> (read-csv file)
-        (drop-rows 1)
-        )))
+  [path-to-directory primary]
+  (let [file (first (filter-csv path-to-directory
+                                #"Recommendations Received\.csv\z"))]
+    (read-and-add-primary file primary)))
 
 (defpipe linkedin-skills-pipeline
-  [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"Skills\.csv\z"))]
-    (-> (read-csv file)
-        (drop-rows 1)
-        )))
+  [path-to-directory primary]
+  (let [file (first (filter-csv path-to-directory
+                                #"Skills\.csv\z"))]
+    (read-and-add-primary file primary)))
 
 (defpipe linkedin-ad-targeting-pipeline
-  [path-to-directory emails]
-  (let [file (first (filter-csv path-to-directory #"Ad Targeting\.csv\z"))]
-    (-> (read-csv file)
-        (drop-rows 1)
-        )))
+  [path-to-directory primary]
+  (let [file (first (filter-csv path-to-directory
+                                #"Ad Targeting\.csv\z"))]
+    (read-and-add-primary file primary)))
 

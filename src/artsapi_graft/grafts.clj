@@ -7,6 +7,8 @@
                                                      get-tweets-from-archive]]
             [artsapi-graft.pipeline :refer :all]))
 
+;; not strictly grafts
+
 (defn to-field->quads
   [messages]
   (mapcat (fn [msg]
@@ -31,6 +33,13 @@
                         (mentions-template tweet mention))
                       (tweet/get-mentions tweet))))
           tweets))
+
+(defn linkedin-owner->quads
+  [emails primary]
+  (-> (add-column emails :primary primary)
+      owner-template))
+
+;; now these are the grafts we are looking for
 
 (defgraft linkedin-connections-graft)
 

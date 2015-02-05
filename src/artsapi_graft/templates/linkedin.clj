@@ -8,6 +8,20 @@
             [artsapi-graft.ontologies :refer :all]
             [artsapi-graft.prefixers :refer :all]))
 
+(def owner-template
+  (graph-fn [[email confirmed is-primary timestamp notes primary]]
+            (graph person-graph-uri
+                   [(resource-uri "people" primary)
+                    [rdf:a foaf:Person]
+                    [foaf:account (resource-uri "linkedin-accounts" primary)]
+                    [vcard:hasEmail (s email)]
+                    [foaf:mbox (s email)]])
+
+            (graph linkedin-account-graph-uri
+                   [(resource-uri "linkedin-accounts" primary)
+                    [rdf:a arts:LinkedInAccount]
+                    [vcard:hasEmail (s primary)]])))
+
 (def connections-template
   (graph-fn [[first-name last-name email-address
               current-company current-position owner-email]]

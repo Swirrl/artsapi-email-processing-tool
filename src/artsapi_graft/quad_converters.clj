@@ -23,10 +23,12 @@
 
 (defn linkedin->quads
   [path-to-directory]
-  (let [emails (get-linkedin-email-addresses path-to-directory)] 
-    (lazy-cat (linkedin-connections-pipeline path-to-directory emails)
-              (linkedin-endorsements-pipeline path-to-directory emails)
-              (linkedin-recommendations-given-pipeline path-to-directory emails)
-              (linkedin-recommendations-received-pipeline path-to-directory emails)
-              (linkedin-skills-pipeline path-to-directory emails)
-              (linkedin-ad-targeting-pipeline path-to-directory emails))))
+  (let [emails (get-linkedin-email-ds path-to-directory)
+        primary (get-linkedin-primary-email path-to-directory)] 
+    (lazy-cat (linkedin-owner->quads emails)
+              (linkedin-connections-graft path-to-directory primary)
+              (linkedin-endorsements-graft path-to-directory primary)
+              (linkedin-recommendations-given-graft path-to-directory primary)
+              (linkedin-recommendations-received-graft path-to-directory primary)
+              (linkedin-skills-graft path-to-directory primary)
+              (linkedin-ad-targeting-graft path-to-directory primary))))
