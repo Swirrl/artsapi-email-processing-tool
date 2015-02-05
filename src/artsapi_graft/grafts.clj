@@ -41,14 +41,26 @@
 
 ;; now these are the grafts we are looking for
 
-(defgraft linkedin-connections-graft)
+(defgraft linkedin-connections-graft
+  [path-to-directory primary]
+  (linkedin-connections-pipeline path-to-directory primary))
 
-(defgraft linkedin-endorsements-graft)
+(defgraft linkedin-endorsements-graft
+  [path-to-directory primary]
+  (linkedin-endorsements-pipeline path-to-directory primary))
 
-(defgraft linkedin-recommendations-given-graft)
+(defgraft linkedin-recommendations-given-graft
+  [path-to-directory primary]
+  (linkedin-recommendations-given-pipeline path-to-directory primary))
 
-(defgraft linkedin-recommendations-received-graft)
+(defgraft linkedin-recommendations-received-graft
+  [path-to-directory primary]
+  (linkedin-recommendations-received-pipeline path-to-directory primary))
 
-(defgraft linkedin-skills-graft)
+(defgraft linkedin-skills-graft
+  [path-to-directory primary]
+  (linkedin-skills-pipeline path-to-directory primary))
 
-(defgraft linkedin-ad-targeting-graft)
+(defgraft linkedin-ad-targeting-graft
+  [path-to-directory primary]
+  (linkedin-ad-targeting-pipeline path-to-directory primary))

@@ -1,5 +1,6 @@
 (ns artsapi-graft.templates.linkedin
-  (:require [grafter.tabular :refer :all]
+  (:require [clojure.string :as st :refer :all]
+            [grafter.tabular :refer :all]
             [grafter.rdf :refer :all]
             [grafter.rdf.ontologies.rdf :refer :all]
             [grafter.rdf.ontologies.org :refer :all]
@@ -47,9 +48,7 @@
                     [rdf:a arts:LinkedInAccount]
                     [foaf:givenName (s first-name)]
                     [foaf:familyName (s last-name)]
-                    [foaf:name (s (str first-name
-                                       " "
-                                       last-name))]
+                    [foaf:name (s (st/join [first-name " " last-name]))]
                     [vcard:hasEmail (s email-address)]])
             
             (graph linkedin-account-graph-uri
@@ -65,9 +64,7 @@
                                    endorser-first-name endorser-last-name)
                     [rdf:a arts:LinkedInEndorsement]
                     [arts:hasLinkedInSkill (resource-uri "linkedin-skill" skill-name)]
-                    [arts:endorser (s (str endorser-first-name
-                                           " "
-                                           endorser-last-name))]
+                    [arts:endorser (s (st/join [endorser-first-name " " endorser-last-name]))]
                     [arts:endorsee (resource-uri "people" owner-email)]
                     [arts:receivedAt endorsement-date]])
 
@@ -84,9 +81,7 @@
                                    recommendee-first-name recommendee-last-name)
                     [rdf:a arts:LinkedInRecommendation]
                     [arts:recommender (resource-uri "people" owner-email)]
-                    [arts:recommendee (s (str recommendee-first-name
-                                              " "
-                                              recommendee-last-name))]
+                    [arts:recommendee (s (st/join [recommendee-first-name " " recommendee-last-name]))]
                     [arts:receivedAt recommendation-date]])))
 
 (def recommendations-received-template
@@ -96,9 +91,7 @@
                    [(linkedin-hash "recommendations" recommendation-date
                                    recommender-first-name recommender-last-name)
                     [rdf:a arts:LinkedInRecommendation]
-                    [arts:recommender (s (str recommender-first-name
-                                              " "
-                                              recommendee-last-name))]
+                    [arts:recommender (s (st/join [recommender-first-name " " recommender-last-name]))]
                     [arts:recommendee (resource-uri "people" owner-email)]
                     [arts:receivedAt recommendation-date]])))
 
