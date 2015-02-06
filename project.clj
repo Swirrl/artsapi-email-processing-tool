@@ -8,5 +8,4 @@
                  [org.mnode.mstor/mstor "0.9.13"]
                  [digest "1.4.4"]
                  [cheshire "5.4.0"]]
-  :aot [artsapi-graft.core]
   :main artsapi-graft.core)
