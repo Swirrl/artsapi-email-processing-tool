@@ -25,7 +25,7 @@
   [path-to-directory]
   (let [emails (get-linkedin-email-ds path-to-directory)
         primary (get-linkedin-primary-email path-to-directory)] 
-    (lazy-cat (linkedin-owner->quads emails primary)
+    (lazy-cat (linkedin-owner-graft emails primary)
               (linkedin-connections-graft path-to-directory primary)
               (linkedin-endorsements-graft path-to-directory primary)
               (linkedin-recommendations-given-graft path-to-directory primary)

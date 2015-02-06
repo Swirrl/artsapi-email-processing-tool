@@ -1,12 +1,14 @@
 (ns artsapi-graft.pipeline
   (:require [grafter.tabular :refer :all]
-            [artsapi-graft.linkedin :refer :all]
-            [artsapi-graft.templates.email :refer :all]
-            [artsapi-graft.templates.twitter :refer :all]))
+            [artsapi-graft.linkedin :refer :all]))
 
 (defn get-sender-email-ds
   [messages]
   (make-dataset messages [:from :from-personal :from-domain :sent-date :subject]))
+
+(defpipe linkedin-owner-pipeline
+  [emails primary]
+  (add-column emails :primary primary))
 
 (defpipe linkedin-connections-pipeline
   [path-to-directory primary]

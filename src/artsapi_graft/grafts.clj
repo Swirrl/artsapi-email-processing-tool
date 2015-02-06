@@ -39,12 +39,11 @@
                       (tweet/get-mentions tweet))))
           tweets))
 
-(defn linkedin-owner->quads
-  [emails primary]
-  (-> (add-column emails :primary primary)
-      owner-template))
-
 ;; now these are the grafts we are looking for
+
+(defgraft linkedin-owner-graft
+  linkedin-owner-pipeline
+  owner-template)
 
 (defgraft linkedin-connections-graft
   linkedin-connections-pipeline
