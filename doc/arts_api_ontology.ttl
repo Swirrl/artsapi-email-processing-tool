@@ -345,6 +345,7 @@ keywords:inCategory a owl:ObjectProperty, rdf:Property;
     rdfs:label "In Category"@en;
     rdfs:comment ""@en;
     rdfs:isDefinedBy arts:ontology;
+    rdfs:subPropertyOf skos:broader;
     rdfs:domain keywords:KeywordSubCategory;
     rdfs:range keywords:KeywordCategory;
     .
@@ -353,6 +354,7 @@ keywords:inSubCategory a owl:ObjectProperty, rdf:Property;
     rdfs:label "In Sub-Category"@en;
     rdfs:comment ""@en;
     rdfs:isDefinedBy arts:ontology;
+    rdfs:subPropertyOf skos:broader;
     rdfs:domain keywords:Keyword;
     rdfs:range keywords:KeywordSubCategory;
     .
