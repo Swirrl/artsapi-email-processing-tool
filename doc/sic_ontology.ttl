@@ -58,7 +58,7 @@ sic:Class a owl:Class, rdfs:Class;
 
 sic:SubClass a owl:Class, rdfs:Class;
     rdfs:label "An SIC SubClass"@en;
-    rdfs:comment "A fifth-level tier in the SIC hierarchy. Comes as five numbers with a decimal point and foward slash, e.g. 01.62/1"@en;
+    rdfs:comment "A fifth-level tier in the SIC hierarchy. Comes as five numbers with a decimal point and forward slash, e.g. 01.62/1"@en;
     rdfs:isDefinedBy sic:ontology;
     skos:broader sic:Class;
     .
