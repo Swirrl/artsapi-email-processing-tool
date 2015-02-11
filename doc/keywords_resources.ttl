@@ -8,104 +8,104 @@
 # Concept Scheme Resources 
 #---------------------------------------------------------
 
-# Category (i.e. subjectArea property) Concept Scheme Concepts
+# Category (i.e. subjectArea) Resources
 #---------------------------------------------------------
 
 keywordcategory:managing a keywords:KeywordCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Managing"@en;
+    rdfs:comment "Managing"@en;
     .
 
 keywordcategory:developing a keywords:KeywordCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Developing"@en;
+    rdfs:comment "Developing"@en;
     .
 
 keywordcategory:promotion a keywords:KeywordCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Promotion"@en;
+    rdfs:comment "Promotion"@en;
     .
 
 keywordcategory:networking a keywords:KeywordCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Networking"@en;
+    rdfs:comment "Networking"@en;
     .
 
 keywordcategory:operations a keywords:KeywordCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Operations"@en;
+    rdfs:comment "Operations"@en;
     .
 
-# Sub Category (i.e. functionalArea property) Concept Scheme Concepts
+# Sub Category (i.e. functionalArea) Resources
 #---------------------------------------------------------
 
-keywords:finance a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:finance a keywords:KeywordSubCategory;
+    rdfs:label "Finance"@en;
+    rdfs:comment "Finance"@en;
+    keywords:inCategory keywords:managing;
     .
 
-keywords:operational a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:operational a keywords:KeywordSubCategory;
+    rdfs:label "Operational"@en;
+    rdfs:comment "Operational"@en;
+    keywords:inCategory keywords:managing;
     .
 
-keywords:events a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:events a keywords:KeywordSubCategory;
+    rdfs:label "Events"@en;
+    rdfs:comment "Events"@en;
+    keywords:inCategory keywords:managing;
     .
 
-keywords:research a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:research a keywords:KeywordSubCategory;
+    rdfs:label "Research"@en;
+    rdfs:comment "Research"@en;
+    keywords:inCategory keywords:developing;
     .
 
-keywords:making a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:making a keywords:KeywordSubCategory;
+    rdfs:label "Making"@en;
+    rdfs:comment "Making"@en;
+    keywords:inCategory keywords:developing;
     .
 
-keywords:evaluation a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:evaluation a keywords:KeywordSubCategory;
+    rdfs:label "Evaluation"@en;
+    rdfs:comment "Evaluation"@en;
+    keywords:inCategory keywords:developing;
     .
 
-keywords:discussing a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:discussing a keywords:KeywordSubCategory;
+    rdfs:label "Discussing"@en;
+    rdfs:comment "Discussing"@en;
+    keywords:inCategory keywords:developing;
     .
 
-keywords:writing a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:writing a keywords:KeywordSubCategory;
+    rdfs:label "Writing"@en;
+    rdfs:comment "Writing"@en;
+    keywords:inCategory keywords:developing;
     .
 
-keywords:marketing a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+keywordsubcategory:marketing a keywords:KeywordSubCategory;
+    rdfs:label "Marketing"@en;
+    rdfs:comment "Marketing"@en;
+    keywords:inCategory keywords:promotion;
     .
 
 keywords:informal a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+    rdfs:label "Informal"@en;
+    rdfs:comment "Informal"@en;
+    keywords:inCategory keywords:networking;
     .
 
 keywords:formal a keywords:KeywordSubCategory;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
-    keywords:inCategory keywords:;
+    rdfs:label "Formal"@en;
+    rdfs:comment "Formal"@en;
+    keywords:inCategory keywords:networking;
     .
 
-# Keywords (i.e. mentionedKeyword property) Concept Scheme Concepts
+# Keywords (i.e. mentionedKeyword property) Resources
 #---------------------------------------------------------
 
 # MANAGING 
@@ -114,156 +114,156 @@ keywords:formal a keywords:KeywordSubCategory;
 # Finance
 
 keywords:budget a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Budget"@en;
+    rdfs:comment "Budget"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:costs a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Costs"@en;
+    rdfs:comment "Costs"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:estimate a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Estimate"@en;
+    rdfs:comment "Estimate"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:account a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Account"@en;
+    rdfs:comment "Account"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:fec a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "FEC"@en;
+    rdfs:comment "FEC"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:bid a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Bid"@en;
+    rdfs:comment "Bid"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:figures a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Figures"@en;
+    rdfs:comment "Figures"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:funding a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Funding"@en;
+    rdfs:comment "Funding"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:fee a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Fee"@en;
+    rdfs:comment "Fee"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:proposal a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Proposal"@en;
+    rdfs:comment "Proposal"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Operational
 
 keywords:planning a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Planning"@en;
+    rdfs:comment "Planning"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:timetable a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Timetable"@en;
+    rdfs:comment "Timetable"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:submission a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Submission"@en;
+    rdfs:comment "Submission"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:deadline a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Deadline"@en;
+    rdfs:comment "Deadline"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:meeting a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Meeting"@en;
+    rdfs:comment "Meeting"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:attending a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Attending"@en;
+    rdfs:comment "Attending"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:agenda a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Agenda"@en;
+    rdfs:comment "Agenda"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:schedule a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Schedule"@en;
+    rdfs:comment "Schedule"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:stages a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Stages"@en;
+    rdfs:comment "Stages"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:tasks a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Tasks"@en;
+    rdfs:comment "Tasks"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:contract a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Contract"@en;
+    rdfs:comment "Contract"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Events
 
 keywords:outcomes a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Outcomes"@en;
+    rdfs:comment "Outcomes"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:deliver a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Deliver"@en;
+    rdfs:comment "Deliver"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:disseminate a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Disseminate"@en;
+    rdfs:comment "Disseminate"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:present a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Present"@en;
+    rdfs:comment "Present"@en;
     keywords:inSubCategory keywords:;
     .
 
@@ -273,220 +273,220 @@ keywords:present a keywords:Keyword;
 # Research
 
 keywords:ask a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Ask"@en;
+    rdfs:comment "Ask"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:thoughts a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Thoughts"@en;
+    rdfs:comment "Thoughts"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:questions a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Questions"@en;
+    rdfs:comment "Questions"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:queries a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Queries"@en;
+    rdfs:comment "Queries"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:insights a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Insights"@en;
+    rdfs:comment "Insights"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:data a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Data"@en;
+    rdfs:comment "Data"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:responses a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Responses"@en;
+    rdfs:comment "Responses"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:analyse a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Analyse"@en;
+    rdfs:comment "Analyse"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:knowing a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Knowing"@en;
+    rdfs:comment "Knowing"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:understanding a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Understanding"@en;
+    rdfs:comment "Understanding"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:explore a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Explore"@en;
+    rdfs:comment "Explore"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:clarify a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Clarify"@en;
+    rdfs:comment "Clarify"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Making
 
 keywords:development a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Development"@en;
+    rdfs:comment "Development"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:productive a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Productive"@en;
+    rdfs:comment "Productive"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:iterate a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Iterate"@en;
+    rdfs:comment "Iterate"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:generate a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Generate"@en;
+    rdfs:comment "Generate"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:build a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Build"@en;
+    rdfs:comment "Build"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:process a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Process"@en;
+    rdfs:comment "Process"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:prototype a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Prototype"@en;
+    rdfs:comment "Prototype"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:pilot a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Pilot"@en;
+    rdfs:comment "Pilot"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Evaluation
 
 keywords:evaluating a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Evaluating"@en;
+    rdfs:comment "Evaluating"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:feedback a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Feedback"@en;
+    rdfs:comment "Feedback"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:review a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Review"@en;
+    rdfs:comment "Review"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Discussing
 
 keywords:conversation a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Conversation"@en;
+    rdfs:comment "Conversation"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:discussion a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Discussion"@en;
+    rdfs:comment "Discussion"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:suggestions a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Suggestions"@en;
+    rdfs:comment "Suggestions"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Writing
 
 keywords:draft a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Draft"@en;
+    rdfs:comment "Draft"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:amend a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Amend"@en;
+    rdfs:comment "Amend"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:written a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Written"@en;
+    rdfs:comment "Written"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:edit a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Edit"@en;
+    rdfs:comment "Edit"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:input a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Input"@en;
+    rdfs:comment "Input"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:comments a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Comments"@en;
+    rdfs:comment "Comments"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:text a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Text"@en;
+    rdfs:comment "Text"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:brief a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Brief"@en;
+    rdfs:comment "Brief"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:application a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Application"@en;
+    rdfs:comment "Application"@en;
     keywords:inSubCategory keywords:;
     .
 
@@ -496,26 +496,26 @@ keywords:application a keywords:Keyword;
 # Marketing
 
 keywords:communications a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Communications"@en;
+    rdfs:comment "Communications"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:press a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Press"@en;
+    rdfs:comment "Press"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:promote a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Promote"@en;
+    rdfs:comment "Promote"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:exposure a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Exposure"@en;
+    rdfs:comment "Exposure"@en;
     keywords:inSubCategory keywords:;
     .
 
@@ -525,21 +525,21 @@ keywords:exposure a keywords:Keyword;
 # Informal
 
 keywords:chat a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Chat"@en;
+    rdfs:comment "Chat"@en;
     keywords:inSubCategory keywords:;
     .
 
 keywords:coffee a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Coffee"@en;
+    rdfs:comment "Coffee"@en;
     keywords:inSubCategory keywords:;
     .
 
 # Formal
 
 keywords:conference a keywords:Keyword;
-    rdfs:label ""@en;
-    rdfs:comment ""@en;
+    rdfs:label "Conference"@en;
+    rdfs:comment "Conference"@en;
     keywords:inSubCategory keywords:;
     .
