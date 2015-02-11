@@ -12,6 +12,7 @@
 @prefix prov:       <http://www.w3.org/ns/prov#> .
 @prefix sioc:       <http://rdfs.org/sioc/ns#> . # for follows and has_subscriber
 @prefix arts:       <http://artsapi.co.uk/def/arts/> .
+@prefix keywords:   <http://artsapi.co.uk/def/arts/keywords/> .
 
 # Ontology metadata
 #---------------------------------------------------------
@@ -111,7 +112,7 @@ arts:Email a owl:Class, rdfs:Class;
 
 arts:connection a owl:ObjectProperty, rdf:Property;
     rdfs:label "A connection"@en;
-    rdfs:comment "Indicates a connection between two foaf:Person resources or two Organisations. A connection is defined as TODO."@en;
+    rdfs:comment "Indicates a connection between two foaf:Person resources or two Organisations. A connection is defined as either a LinkedIn connection or two People that have exchanged one reciprocal email."@en;
     rdfs:isDefinedBy arts:ontology;
     .
 
@@ -135,6 +136,56 @@ arts:position a owl:ObjectProperty, rdf:Property;
     rdfs:comment "Indicates the position or role of a foaf:Person in an organisation to which they belong."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:domain foaf:Person;
+    .
+
+arts:department a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Department"@en;
+    rdfs:comment "Indicates the department (in terms of an org:OrganizationalUnit) to which a foaf:Person belongs."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    rdfs:range org:OrganizationalUnit;
+    .
+
+arts:possibleDepartment a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Possible Department"@en;
+    rdfs:comment "Indicates the department (in terms of an org:OrganizationalUnit) to which a foaf:Person has been predicated to belong, according to a heuristic algorithm internal to the ArtsAPI tool."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    rdfs:range org:OrganizationalUnit;
+    .
+
+arts:subjectArea a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Subject area"@en;
+    rdfs:comment "Indicates an area which this foaf:Person has discussed in official correspondence above a threshold that determines they are likely to have subject area expertise or interest in this Keyword in a professional capacity within their organisation. It is a broad category that points to a resource of the KeywordCategory class and contains zero or more KeywordSubCategor(ies)."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    rdfs:range arts:KeywordCategory;
+    .
+
+arts:functionalArea a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Functional area"@en;
+    rdfs:comment "A broad category that points to a resource of the KeywordSubCategory class. Note that some KeywordCategor(ies) contain no KeywordSubCategories. The presence of this triple means a relevant Keyword in this KeywordSubCategory must also be associated with this foaf:Person."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subPropertyOf arts:subjectArea;
+    rdfs:domain foaf:Person;
+    rdfs:range arts:KeywordSubCategory;
+    .
+
+arts:mentionedKeyword a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Mentioned keyword"@en;
+    rdfs:comment "Indicates a Keyword that was mentioned enough times in emails by the subject (a foaf:Person) to be flagged as significant and generate this triple."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:subPropertyOf arts:functionalArea;
+    rdfs:domain foaf:Person;
+    rdfs:range arts:Keyword;
+    .
+
+arts:containsKeyword a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Contains keyword"@en;
+    rdfs:comment "Indicates a Keyword that was used in the body of this arts:Email."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain arts:Email;
+    rdfs:range arts:Keyword;
     .
 
 arts:worksOn a owl:ObjectProperty, rdf:Property;
@@ -282,4 +333,608 @@ arts:mentions a owl:ObjectProperty, rdf:Property;
     rdfs:domain arts:Tweet;
     rdfs:range arts:TwitterAccount;
     rdfs:subPropertyOf arts:recipient;
+    .
+
+# Keywords Concept Scheme and Classes
+#---------------------------------------------------------
+
+keywords:keywords a skos:ConceptScheme;
+    dfs:label "ArtsAPI Keyword Hierarchy";
+    dc:title "ArtsAPI Keyword Hierarchy";
+    rdfs:comment "A concept scheme for keywords with nesting to represent thematic hierarchies";
+    skos:hasTopConcept keywords:KeywordCategory;
+    .
+
+keywords:KeywordCategory a skos:Concept;
+    rdfs:label "A category"@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    .
+
+keywords:KeywordSubCategory a skos:Concept;
+    rdfs:label "A sub category"@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    skos:broader keywords:KeywordCategory;
+    .
+
+keywords:Keyword a skos:Concept;
+    rdfs:label "A Keyword"@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    skos:broader keywords:KeywordSubCategory;
+    .
+
+# Keywords Properties
+#---------------------------------------------------------
+
+keywords:Keyword a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Endorsee"@en;
+    rdfs:comment "Indicates the recipient of an endorsement."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
+keywords:Keyword a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Endorsee"@en;
+    rdfs:comment "Indicates the recipient of an endorsement."@en;
+    rdfs:isDefinedBy arts:ontology;
+    .
+
+#---------------------------------------------------------
+# Concept Scheme Resources 
+#---------------------------------------------------------
+
+# Category (i.e. subjectArea property) Concept Scheme Concepts
+#---------------------------------------------------------
+
+keywords:managing a keywords:KeywordCategory;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    .
+
+# Sub Category (i.e. functionalArea property) Concept Scheme Concepts
+#---------------------------------------------------------
+
+keywords:finance a keywords:KeywordSubCategory;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inCategory keywords:;
+    .
+
+# Keywords (i.e. mentionedKeyword property) Concept Scheme Concepts
+#---------------------------------------------------------
+
+keywords:budget a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords:costs a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords:estimate a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords:account a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords:fec a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords:bid a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords:figures a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
+    .
+
+keywords: a keywords:Keyword;
+    rdfs:label ""@en;
+    rdfs:comment ""@en;
+    skos:definition "";
+    skos:inScheme keywords:keywords;
+    keywords:inSubCategory keywords:;
     .
