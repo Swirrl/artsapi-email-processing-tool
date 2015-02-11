@@ -156,7 +156,7 @@ arts:possibleDepartment a owl:ObjectProperty, rdf:Property;
 
 arts:subjectArea a owl:ObjectProperty, rdf:Property;
     rdfs:label "Subject area"@en;
-    rdfs:comment "Indicates an area which this foaf:Person has discussed in official correspondence above a threshold that determines they are likely to have subject area expertise or interest in this Keyword in a professional capacity within their organisation. It is a broad category that points to a resource of the KeywordCategory class and contains zero or more KeywordSubCategor(ies)."@en;
+    rdfs:comment "Indicates an area which this foaf:Person has discussed in official correspondence above a threshold that determines they are likely to have subject area expertise or interest in this Keyword in a professional capacity within their organisation. It is a broad category that points to a resource of the KeywordCategory class and contains KeywordSubCategor(ies)."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:domain foaf:Person;
     rdfs:range arts:KeywordCategory;
@@ -164,7 +164,7 @@ arts:subjectArea a owl:ObjectProperty, rdf:Property;
 
 arts:functionalArea a owl:ObjectProperty, rdf:Property;
     rdfs:label "Functional area"@en;
-    rdfs:comment "A broad category that points to a resource of the KeywordSubCategory class. Note that some KeywordCategor(ies) contain no KeywordSubCategories. The presence of this triple means a relevant Keyword in this KeywordSubCategory must also be associated with this foaf:Person."@en;
+    rdfs:comment "A broad category that points to a resource of the KeywordSubCategory class. The presence of this triple means a relevant Keyword in this KeywordSubCategory must also be associated with this foaf:Person."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:subPropertyOf arts:subjectArea;
     rdfs:domain foaf:Person;
@@ -347,23 +347,23 @@ keywords:keywords a skos:ConceptScheme;
 
 keywords:KeywordCategory a skos:Concept;
     rdfs:label "A category"@en;
-    rdfs:comment ""@en;
-    skos:definition "";
+    rdfs:comment "A category contains SubCategor(ies), which in turn contain Keywords."@en;
+    skos:definition "A category contains SubCategor(ies), which in turn contain Keywords."@en;
     skos:inScheme keywords:keywords;
     .
 
 keywords:KeywordSubCategory a skos:Concept;
     rdfs:label "A sub category"@en;
-    rdfs:comment ""@en;
-    skos:definition "";
+    rdfs:comment "A sub category contains Keywords."@en;
+    skos:definition "A sub category contains Keywords."@en;
     skos:inScheme keywords:keywords;
     skos:broader keywords:KeywordCategory;
     .
 
 keywords:Keyword a skos:Concept;
     rdfs:label "A Keyword"@en;
-    rdfs:comment ""@en;
-    skos:definition "";
+    rdfs:comment "A Keyword identified as having specific relevance to a person's role within an organisation."@en;
+    skos:definition "A Keyword identified as having specific relevance to a person's role within an organisation."@en;
     skos:inScheme keywords:keywords;
     skos:broader keywords:KeywordSubCategory;
     .
@@ -371,16 +371,20 @@ keywords:Keyword a skos:Concept;
 # Keywords Properties
 #---------------------------------------------------------
 
-keywords:Keyword a owl:ObjectProperty, rdf:Property;
-    rdfs:label "Endorsee"@en;
-    rdfs:comment "Indicates the recipient of an endorsement."@en;
+keywords:inCategory a owl:ObjectProperty, rdf:Property;
+    rdfs:label "In Category"@en;
+    rdfs:comment ""@en;
     rdfs:isDefinedBy arts:ontology;
+    rdfs:domain keywords:KeywordSubCategory;
+    rdfs:range keywords:KeywordCategory;
     .
 
-keywords:Keyword a owl:ObjectProperty, rdf:Property;
-    rdfs:label "Endorsee"@en;
-    rdfs:comment "Indicates the recipient of an endorsement."@en;
+keywords:inSubCategory a owl:ObjectProperty, rdf:Property;
+    rdfs:label "In Sub-Category"@en;
+    rdfs:comment ""@en;
     rdfs:isDefinedBy arts:ontology;
+    rdfs:domain keywords:Keyword;
+    rdfs:range keywords:KeywordSubCategory;
     .
 
 #---------------------------------------------------------
@@ -393,8 +397,6 @@ keywords:Keyword a owl:ObjectProperty, rdf:Property;
 keywords:managing a keywords:KeywordCategory;
     rdfs:label ""@en;
     rdfs:comment ""@en;
-    skos:definition "";
-    skos:inScheme keywords:keywords;
     .
 
 # Sub Category (i.e. functionalArea property) Concept Scheme Concepts
@@ -403,8 +405,6 @@ keywords:managing a keywords:KeywordCategory;
 keywords:finance a keywords:KeywordSubCategory;
     rdfs:label ""@en;
     rdfs:comment ""@en;
-    skos:definition "";
-    skos:inScheme keywords:keywords;
     keywords:inCategory keywords:;
     .
 
