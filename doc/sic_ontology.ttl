@@ -16,51 +16,64 @@
 # Ontology metadata
 #---------------------------------------------------------
 
-sic:ontology a owl:Ontology;
-
+sic:ontology a owl:Ontology, skos:ConceptScheme;
     rdfs:label "SIC 2007 ontology"@en;
     rdfs:comment "Vocabulary for describing the UK 2007 Standard Industry Classifications."@en;
     dct:created "2015-01-23"^^xsd:date;
     dct:title "SIC 2007 ontology"@en;
     dct:contributor [foaf:mbox "alex@swirrl.com"; foaf:name "Alex Lynham"];
     dct:licence <http://www.opendatacommons.org/licenses/pddl/1.0/>;
+    skos:hasTopConcept sic:Section;
+    .
+
+sic:scheme a skos:ConceptScheme;
+    rdfs:label "SIC 2007 ontology"@en;
+    dct:created "2015-01-23"^^xsd:date;
+    dct:title "SIC 2007 ontology"@en;
+    skos:hasTopConcept sic:Section;
     .
 
 # Core classes
 #---------------------------------------------------------
 
-sic:Section a owl:Class, rdfs:Class;
+sic:Section a owl:Class, rdfs:Class, skos:Concept;
     rdfs:label "An SIC Section"@en;
     rdfs:comment "A top-level tier in the SIC hierarchy. Comes as a letter of the alphabet, e.g. A"@en;
     rdfs:isDefinedBy sic:ontology;
+    skos:topConceptOf sic:scheme;
+    skos:inScheme sic:scheme;
     .
 
-sic:Division a owl:Class, rdfs:Class;
+sic:Division a owl:Class, rdfs:Class, skos:Concept;
     rdfs:label "An SIC Division"@en;
     rdfs:comment "A second-level tier in the SIC hierarchy. Comes as two numbers, e.g. 01"@en;
     rdfs:isDefinedBy sic:ontology;
     skos:broader sic:Section;
+    skos:inScheme sic:scheme;
     .
 
-sic:Group a owl:Class, rdfs:Class;
+sic:Group a owl:Class, rdfs:Class, skos:Concept;
     rdfs:label "An SIC Group."@en;
     rdfs:comment "A third-level tier in the SIC hierarchy. Comes as three numbers with a decimal point, e.g. 01.1"@en;
     rdfs:isDefinedBy sic:ontology;
     skos:broader sic:Division;
+    skos:inScheme sic:scheme;
     .
 
-sic:Class a owl:Class, rdfs:Class;
+sic:Class a owl:Class, rdfs:Class, skos:Concept;
     rdfs:label "An SIC Class"@en;
     rdfs:comment "A fourth-level tier in the SIC hierarchy. Comes as four numbers with a decimal point, e.g. 01.11"@en;
     rdfs:isDefinedBy sic:ontology;
     skos:broader sic:Group;
+    skos:inScheme sic:scheme;
     .
 
-sic:SubClass a owl:Class, rdfs:Class;
+sic:SubClass a owl:Class, rdfs:Class, skos:Concept;
     rdfs:label "An SIC SubClass"@en;
     rdfs:comment "A fifth-level tier in the SIC hierarchy. Comes as five numbers with a decimal point and forward slash, e.g. 01.62/1"@en;
     rdfs:isDefinedBy sic:ontology;
     skos:broader sic:Class;
+    skos:inScheme sic:scheme;
     .
 
 # Properties and relationships
