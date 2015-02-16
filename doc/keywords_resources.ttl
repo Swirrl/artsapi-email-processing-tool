@@ -2,7 +2,7 @@
 @prefix rdfs:                   <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix keywordcategory:        <http://artsapi.co.uk/id/keywords/category/> .
 @prefix keywordsubcategory:     <http://artsapi.co.uk/id/keywords/subcategory/> .
-@prefix keywordresource:       <http://artsapi.co.uk/id/keywords/keyword/> .
+@prefix keywordresource:        <http://artsapi.co.uk/id/keywords/keyword/> .
 
 #---------------------------------------------------------
 # Concept Scheme Resources 

@@ -6,7 +6,7 @@
             [artsapi-graft.core :refer [write-to-ttl strike-nils]]))
 
 ;; this is a pipeline to generate a linked data ontology from the SIC2007 hierarchy.
-;; the input file is the six2007summaryofstructur_tcm77-223506.xls file in the doc directory.
+;; the input file is the six2007summaryofstructur_tcm77-223506.xls file in the resources directory.
 
 ;; the column structure is a bit odd, it corresponds to:
 ;; A: section B: section label C: division D: division label E: group F: group label G: class H: class label I: sub class J: sub class label

@@ -43,7 +43,10 @@
 (defn get-sender
   "Returns a InternetAddress object from the sender's metadata."
   [msg]
-  (let [sender-email (.getFrom msg)]
+  (let [sender-email (try
+                       (.getFrom msg)
+                       (catch javax.mail.internet.AddressException e
+                         '("nil@example.com")))]
     (get sender-email 0)))
 
 (defn get-to
