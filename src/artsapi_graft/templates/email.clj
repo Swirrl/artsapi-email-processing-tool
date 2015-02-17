@@ -94,7 +94,7 @@
           [email-uri
            [arts:ccRecipient (resource-uri "people" email)]])
    
-   (gr20aph person-graph-uri
+   (graph person-graph-uri
           [(resource-uri "people" email)
            [rdfs:label (catch-nil->s personal)]
            [rdf:a foaf:Person]
