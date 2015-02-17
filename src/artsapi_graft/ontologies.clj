@@ -39,6 +39,8 @@
 
 (def arts:position (arts "position"))
 
+(def arts:containsKeyword (arts "containsKeyword"))
+
 (def arts:worksOn (arts "worksOn"))
 
 (def arts:workedOn (arts "workedOn"))

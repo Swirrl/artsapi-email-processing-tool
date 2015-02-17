@@ -116,10 +116,10 @@
            [rdf:a arts:Domain]
            [vcard:hasUrl (s (str "http://" domain))]])))
 
-(defn keywords-template 
-  [keyword {:keys from sent-date subject}]
+(defn keyword-email-template 
+  [included-keyword {:keys [from sent-date subject]}]
 
   (graph email-graph-uri
          [(email-uri from sent-date subject)
-          [arts:containsKeyword (s keyword)]]))
+          [arts:containsKeyword (resource-uri "keywords/keyword" included-keyword)]]))
 
