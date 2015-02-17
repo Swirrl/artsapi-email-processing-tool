@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [grafter "0.3.0"]
                  [org.mnode.mstor/mstor "0.9.13"]
+                 [clojure-mail "0.1.6"]
                  [digest "1.4.4"]
                  [cheshire "5.4.0"]]
   :main artsapi-graft.core)

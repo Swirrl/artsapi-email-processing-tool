@@ -1,5 +1,6 @@
 (ns artsapi-graft.message
-  (:require [artsapi-graft.prefixers :refer [email-uri]])
+  (:require [artsapi-graft.prefixers :refer [email-uri]]
+            [clojure-mail.parser :refer :all :as parse])
   (:import [javax.mail.internet
             MimeMessage
             MimeMultipart
@@ -142,5 +143,5 @@
                     :email (address->str %)
                     :domain (get-domain %)})
               (get-cc msg))
-     :content (get-content msg)}))
+     :content (parse/html->text (get-content msg))}))
 
