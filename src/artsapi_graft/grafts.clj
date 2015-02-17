@@ -5,7 +5,8 @@
             [artsapi-graft.templates.twitter :refer :all]
             [artsapi-graft.twitter :as tweet :refer [get-mentions
                                                      get-tweets-from-archive]]
-            [artsapi-graft.pipeline :refer :all]))
+            [artsapi-graft.pipeline :refer :all]
+            [artsapi-graft.keywords :refer [included-keywords]]))
 
 ;; not strictly grafts
 
@@ -24,6 +25,13 @@
   [messages]
   (mapcat (fn [msg]
             (mapcat cc-email-template (msg :cc)))
+          messages))
+
+(defn keywords->quads
+  [messages]
+  (mapcat (fn [msg]
+            (let [included-words (included-keywords msg)]
+              (map #(keyword-email-template %) included-words)))
           messages))
 
 (defn tweet-sender->quads

@@ -93,8 +93,8 @@
    (graph email-graph-uri
           [email-uri
            [arts:ccRecipient (resource-uri "people" email)]])
-
-   (graph person-graph-uri
+   
+   (gr20aph person-graph-uri
           [(resource-uri "people" email)
            [rdfs:label (catch-nil->s personal)]
            [rdf:a foaf:Person]
@@ -115,4 +115,11 @@
            [rdfs:label (s domain)]
            [rdf:a arts:Domain]
            [vcard:hasUrl (s (str "http://" domain))]])))
+
+(defn keywords-template 
+  [keyword {:keys from sent-date subject}]
+
+  (graph email-graph-uri
+         [(email-uri from sent-date subject)
+          [arts:containsKeyword (s keyword)]]))
 
