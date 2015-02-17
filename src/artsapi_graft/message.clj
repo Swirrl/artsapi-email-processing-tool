@@ -1,6 +1,8 @@
 (ns artsapi-graft.message
   (:require [artsapi-graft.prefixers :refer [email-uri]]
-            [clojure-mail.parser :refer :all :as parse])
+            [clojure-mail.parser :refer :all :as parse]
+            [clojure-mail.message :as msg :refer [message-body
+                                                  safe-get]])
   (:import [javax.mail.internet
             MimeMessage
             MimeMultipart
@@ -113,7 +115,11 @@
 (defn get-content
   "Get message contents"
   [msg]
-  (.getContent msg))
+  (let [content-hash (msg/safe-get (msg/message-body msg))]
+    (try
+      (:body (filter #(re-find #"text/plain" (:content-type %)) content-hash))
+      (catch Exception e
+          "nil"))))
 
 ;; Ultimately, we want to wrap this in a try/catch block and cause all
 ;; the methods above to raise errors if they cannot resolve. For core
@@ -143,5 +149,5 @@
                     :email (address->str %)
                     :domain (get-domain %)})
               (get-cc msg))
-     :content (parse/html->text (get-content msg))}))
+     :content (get-content msg)}))
 
