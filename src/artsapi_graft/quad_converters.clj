@@ -13,7 +13,8 @@
     (let [messages (->> [:default "inbox" "sent"] (get-all-messages store))]
       (lazy-cat (email-sender-pipeline messages)
                 (to-field->quads messages)
-                (cc-field->quads messages)))))
+                (cc-field->quads messages)
+                (keywords->quads messages)))))
 
 (defn twitter->quads
   [tweet-directory]

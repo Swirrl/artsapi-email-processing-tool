@@ -10,5 +10,6 @@
 
 (defn included-keywords
   [msg]
-  (filter identity
-          (map #(re-find (re-pattern %) msg) keywords->seq)))
+  (if-not (nil? msg)
+    (filter identity
+            (map #(re-find (re-pattern %) msg) keywords->seq))))

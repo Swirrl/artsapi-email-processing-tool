@@ -117,7 +117,7 @@
   [msg]
   (let [content-hash (msg/safe-get (msg/message-body msg))]
     (try
-      (:body (filter #(re-find #"text/plain" (:content-type %)) content-hash))
+      (:body (first (filter #(re-find #"text/plain" (:content-type %)) content-hash)))
       (catch Exception e
           "nil"))))
 

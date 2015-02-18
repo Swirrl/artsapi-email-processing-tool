@@ -31,7 +31,7 @@
   [messages]
   (mapcat (fn [msg]
             (let [included-words (included-keywords (msg :content))]
-              (map #(keyword-email-template % msg) included-words)))
+              (mapcat #(keyword-email-template % msg) included-words)))
           messages))
 
 (defn tweet-sender->quads
