@@ -30,7 +30,12 @@
                 (in-quad? "http://nil.example.com" quad)))
           quads))
 
-(defn write-to-ttl
+(defn load->db
+  [quads query-url update-url]
+  (let [repo (sparql-repo query-url update-url)]
+    (add repo quads)))
+
+(defn write-to-file
   [quads destination]
   (let [validated-quads (strike-nils quads)]
     (pr/add (io/rdf-serializer destination) validated-quads)))
@@ -49,7 +54,11 @@
     (re-find #"mbox\z" path) (email->quads path)
     (re-find #"LinkedInDataExport" path) (linkedin->quads path)))
 
-(defn -main [path output]
-  (-> (dispatcher path)
-      (write-to-ttl output)))
+(defn -main
+  ([path output]
+     (-> (dispatcher path)
+         (write-to-file output)))
+  ([path query-url update-url]
+     (-> (dispatcher path)
+         (load->db query-url update-url))))
 
