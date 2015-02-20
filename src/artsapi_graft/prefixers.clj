@@ -42,7 +42,7 @@
 
 (defn sanitize
   [string]
-  (clojure.string/replace slug #"'|\"|\\" "" ))
+  (clojure.string/replace string #"'|\"|\\" "" ))
 
 (defn ->slug
   [id-string]
@@ -51,7 +51,8 @@
       (clojure.string/lower-case)
       (clojure.string/replace #"\.|@| " "-")
       sanitize
-      trim-trailing-hyphens))
+      ;;trim-trailing-hyphens
+      ))
 
 (defn resource-uri
   "Generate a resource uri. For example, these outputs should be expected:
