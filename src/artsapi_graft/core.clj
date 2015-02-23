@@ -33,17 +33,37 @@
 
 (defn load-slice
   [quad-slice repo]
-  (pr/add repo (first quad-slice))
+  (println (str "> Adding "
+                (count (first quad-slice))
+                " quads..."))
+  
+  (try
+    (pr/add repo (first quad-slice))
+    (println (str "✔ Added. "
+                  (count (second quad-slice))
+                  " left"))
+    
+    (catch org.openrdf.repository.RepositoryException e
+      (println (str "✘ Unable to add: "
+                    e
+                    " skipping. "
+                    (count (second quad-slice))
+                    " left"))))
+  
   (second quad-slice))
 
 (defn load->db
   [quads query-url update-url]
+  
   (let [repo (sparql-repo query-url update-url)
         validated-quads (strike-nils quads)]
+    
     (loop [quads validated-quads]
       (let [quad-slice (split-at 10000 quads)]
-        (if-not (empty? (first quad-slice))
+        
+        (if (empty? (first quad-slice))
           (println "-> Load complete")
+          
           (recur (load-slice quad-slice repo)))))))
 
 (defn write-to-file
