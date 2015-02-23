@@ -2,7 +2,8 @@
   (:require [grafter.rdf.protocols :as pr]
             [artsapi-graft.quad-converters :refer :all]
             [grafter.rdf :as rdf]
-            [grafter.rdf.io :as io])
+            [grafter.rdf.io :as io]
+            [grafter.rdf.repository :refer [sparql-repo]])
   (:gen-class))
 
 ;; Next we need to get a list of common hosting domains and filter out
@@ -30,10 +31,20 @@
                 (in-quad? "http://nil.example.com" quad)))
           quads))
 
+(defn load-slice
+  [quad-slice repo]
+  (pr/add repo (first quad-slice))
+  (second quad-slice))
+
 (defn load->db
   [quads query-url update-url]
-  (let [repo (sparql-repo query-url update-url)]
-    (add repo quads)))
+  (let [repo (sparql-repo query-url update-url)
+        validated-quads (strike-nils quads)]
+    (loop [quads validated-quads]
+      (let [quad-slice (split-at 10000 quads)]
+        (if-not (empty? (first quad-slice))
+          (println "-> Load complete")
+          (recur (load-slice quad-slice repo)))))))
 
 (defn write-to-file
   [quads destination]
