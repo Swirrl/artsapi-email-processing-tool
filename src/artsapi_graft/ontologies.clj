@@ -3,9 +3,9 @@
 
 ;; classes
 
-(def arts-domain (prefixer "http://artsapi.co.uk/"))
+(def arts-domain (prefixer "http://artsapi.org/"))
 
-(def arts (prefixer "http://artsapi.co.uk/def/arts/"))
+(def arts (prefixer "http://artsapi.org/def/arts/"))
 
 (def arts:Domain (arts "Domain"))
 

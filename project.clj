@@ -1,4 +1,4 @@
-(defproject artsapi-graft "2.0.1"
+(defproject artsapi-graft "2.1.0"
   :description "A tool for converting datasets into RDF as part of the ArtsAPI project."
   :url "https://github.com/Swirrl/artsapi-email-processing-tool"
   :license {:name "Eclipse Public License"

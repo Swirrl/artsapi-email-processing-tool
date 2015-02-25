@@ -11,8 +11,8 @@
 @prefix vcard:      <http://www.w3.org/2006/vcard/ns#> .
 @prefix prov:       <http://www.w3.org/ns/prov#> .
 @prefix sioc:       <http://rdfs.org/sioc/ns#> . # for follows and has_subscriber
-@prefix arts:       <http://artsapi.co.uk/def/arts/> .
-@prefix keywords:   <http://artsapi.co.uk/def/arts/keywords/> .
+@prefix arts:       <http://artsapi.org/def/arts/> .
+@prefix keywords:   <http://artsapi.org/def/arts/keywords/> .
 
 # Ontology metadata
 #---------------------------------------------------------
