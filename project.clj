@@ -9,4 +9,5 @@
                  [clojure-mail "0.1.6"]
                  [digest "1.4.4"]
                  [cheshire "5.4.0"]]
+  :jvm-opts ["-Xmx7g"]
   :main artsapi-graft.core)
