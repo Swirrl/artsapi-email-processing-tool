@@ -29,7 +29,10 @@
    Extracts only the first email address it can and returns
    that as the correct javamail class."
   [msg]
-  (conj '() (javax.mail.internet.InternetAddress. (re-find #"<\S+>" (get-header msg "to")))))
+  (conj '() (try
+              (javax.mail.internet.InternetAddress. (re-find #"<\S+>" (get-header msg "to")))
+              (catch Exception e
+                (javax.mail.internet.InternetAddress. (first (clojure.string/split (get-header msg "to") #",")))))))
 
 (defn get-cc-from-header
   "Primarily for error recovery in cases of malformed fields.

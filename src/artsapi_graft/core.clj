@@ -31,6 +31,9 @@
                 (in-quad? "http://nil.example.com" quad)))
           quads))
 
+;; if your files are small, you can un-comment to get detailed logging
+;; at the expense of lazy evaluation
+
 (defn load-slice
   [quad-slice repo]
   (println (str "> Adding "
@@ -40,15 +43,17 @@
   (try
     (pr/add repo (first quad-slice))
     (println (str "✔ Added. "
-                  (count (second quad-slice))
-                  " left"))
+                  ;;(count (second quad-slice))
+                  ;;" left"
+                  ))
     
     (catch org.openrdf.repository.RepositoryException e
       (println (str "✘ Unable to add: "
                     e
-                    " skipping. "
-                    (count (second quad-slice))
-                    " left"))))
+                    " - skipping. "
+                    ;;(count (second quad-slice))
+                    ;;" left"
+                    ))))
   
   (second quad-slice))
 
