@@ -50,9 +50,7 @@
       (clojure.string/trim)
       (clojure.string/lower-case)
       (clojure.string/replace #"\.|@| " "-")
-      sanitize
-      ;;trim-trailing-hyphens
-      ))
+      sanitize))
 
 (defn resource-uri
   "Generate a resource uri. For example, these outputs should be expected:

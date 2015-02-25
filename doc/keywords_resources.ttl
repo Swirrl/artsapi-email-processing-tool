@@ -1,8 +1,8 @@
 @prefix rdf:                    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:                   <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix keywordcategory:        <http://artsapi.org/id/keywords/category/> .
-@prefix keywordsubcategory:     <http://artsapi.org/id/keywords/subcategory/> .
-@prefix keywordresource:        <http://artsapi.org/id/keywords/keyword/> .
+@prefix keywordcategory:        <http://artsapi.com/id/keywords/category/> .
+@prefix keywordsubcategory:     <http://artsapi.com/id/keywords/subcategory/> .
+@prefix keywordresource:        <http://artsapi.com/id/keywords/keyword/> .
 
 #---------------------------------------------------------
 # Concept Scheme Resources 

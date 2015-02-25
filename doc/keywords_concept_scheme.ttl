@@ -5,7 +5,7 @@
 @prefix skos:       <http://www.w3.org/2004/02/skos/core#> .
 @prefix foaf:       <http://xmlns.com/foaf/0.1/> .
 @prefix dct:        <http://purl.org/dc/terms/> .
-@prefix keywords:   <http://artsapi.org/def/arts/keywords/> .
+@prefix keywords:   <http://artsapi.com/def/arts/keywords/> .
 
 # Keywords Concept Scheme
 #---------------------------------------------------------
