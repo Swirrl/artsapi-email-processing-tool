@@ -39,7 +39,6 @@
   (println (str "> Adding "
                 (count batch)
                 " quads..."))
-
   (try
     (pr/add repo batch)
     (println "✔ Added. ")
@@ -55,7 +54,7 @@
   (let [repo (sparql-repo query-url update-url)
         validated-quads (strike-nils quads)
         batched-quads (partition-all 10000 validated-quads)]
-    
+
     (doseq [batch batched-quads]
       (load-slice batch repo))))
 
