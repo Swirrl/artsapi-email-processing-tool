@@ -35,41 +35,29 @@
 ;; at the expense of lazy evaluation
 
 (defn load-slice
-  [quad-slice repo]
+  [batch repo] 
   (println (str "> Adding "
-                (count (first quad-slice))
+                (count batch)
                 " quads..."))
-  
+
   (try
-    (pr/add repo (first quad-slice))
-    (println (str "✔ Added. "
-                  ;;(count (second quad-slice))
-                  ;;" left"
-                  ))
+    (pr/add repo batch)
+    (println "✔ Added. ")
     
     (catch org.openrdf.repository.RepositoryException e
       (println (str "✘ Unable to add: "
                     e
-                    " - skipping. "
-                    ;;(count (second quad-slice))
-                    ;;" left"
-                    ))))
-  
-  (second quad-slice))
+                    " - skipping. ")))))
 
 (defn load->db
   [quads query-url update-url]
   
   (let [repo (sparql-repo query-url update-url)
-        validated-quads (strike-nils quads)]
+        validated-quads (strike-nils quads)
+        batched-quads (partition-all 10000 validated-quads)]
     
-    (loop [quads validated-quads]
-      (let [quad-slice (split-at 10000 quads)]
-        
-        (if (empty? (first quad-slice))
-          (println "-> Load complete")
-          
-          (recur (load-slice quad-slice repo)))))))
+    (doseq [batch batched-quads]
+      (load-slice batch repo))))
 
 (defn write-to-file
   [quads destination]
@@ -96,5 +84,6 @@
          (write-to-file output)))
   ([path query-url update-url]
      (-> (dispatcher path)
-         (load->db query-url update-url))))
+         (load->db query-url update-url))
+     (println "-> Load complete")))
 
