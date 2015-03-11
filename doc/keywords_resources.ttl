@@ -32,9 +32,9 @@ keywordcategory:networking a keywords:KeywordCategory;
     rdfs:comment "Networking"@en;
     .
 
-keywordcategory:operations a keywords:KeywordCategory;
-    rdfs:label "Operations"@en;
-    rdfs:comment "Operations"@en;
+keywordcategory:events a keywords:KeywordCategory;
+    rdfs:label "Events"@en;
+    rdfs:comment "Events"@en;
     .
 
 # Sub Category (i.e. functionalArea) Resources
@@ -49,12 +49,6 @@ keywordsubcategory:finance a keywords:KeywordSubCategory;
 keywordsubcategory:operational a keywords:KeywordSubCategory;
     rdfs:label "Operational"@en;
     rdfs:comment "Operational"@en;
-    keywords:inCategory keywordcategory:managing;
-    .
-
-keywordsubcategory:events a keywords:KeywordSubCategory;
-    rdfs:label "Events"@en;
-    rdfs:comment "Events"@en;
     keywords:inCategory keywordcategory:managing;
     .
 
@@ -104,6 +98,24 @@ keywordsubcategory:formal a keywords:KeywordSubCategory;
     rdfs:label "Formal"@en;
     rdfs:comment "Formal"@en;
     keywords:inCategory keywordcategory:networking;
+    .
+
+keywordsubcategory:performing a keywords:KeywordSubCategory;
+    rdfs:label "Performing"@en;
+    rdfs:comment "Performing"@en;
+    keywords:inCategory keywordcategory:events;
+    .
+
+keywordsubcategory:fora a keywords:KeywordSubCategory;
+    rdfs:label "Fora"@en;
+    rdfs:comment "Fora"@en;
+    keywords:inCategory keywordcategory:events;
+    .
+
+keywordsubcategory:disseminating a keywords:KeywordSubCategory;
+    rdfs:label "Disseminating"@en;
+    rdfs:comment "Disseminating"@en;
+    keywords:inCategory keywordcategory:events;
     .
 
 # Keywords (i.e. mentionedKeyword property) Resources
@@ -240,32 +252,6 @@ keywordresource:contract a keywords:Keyword;
     rdfs:label "Contract"@en;
     rdfs:comment "Contract"@en;
     keywords:inSubCategory keywordsubcategory:operational;
-    .
-
-# Events
-
-keywordresource:outcomes a keywords:Keyword;
-    rdfs:label "Outcomes"@en;
-    rdfs:comment "Outcomes"@en;
-    keywords:inSubCategory keywordsubcategory:events;
-    .
-
-keywordresource:deliver a keywords:Keyword;
-    rdfs:label "Deliver"@en;
-    rdfs:comment "Deliver"@en;
-    keywords:inSubCategory keywordsubcategory:events;
-    .
-
-keywordresource:disseminate a keywords:Keyword;
-    rdfs:label "Disseminate"@en;
-    rdfs:comment "Disseminate"@en;
-    keywords:inSubCategory keywordsubcategory:events;
-    .
-
-keywordresource:present a keywords:Keyword;
-    rdfs:label "Present"@en;
-    rdfs:comment "Present"@en;
-    keywords:inSubCategory keywordsubcategory:events;
     .
 
 # DEVELOPING
@@ -539,8 +525,95 @@ keywordresource:coffee a keywords:Keyword;
 
 # Formal
 
+#keywordresource:conference a keywords:Keyword;
+#    rdfs:label "Conference"@en;
+#    rdfs:comment "Conference"@en;
+#    keywords:inSubCategory keywordsubcategory:formal;
+#    .
+
+# EVENTS
+# //////
+
+# Performing
+
+keywordresource:concert a keywords:Keyword;
+    rdfs:label "Concert"@en;
+    rdfs:comment "Concert"@en;
+    keywords:inSubCategory keywordsubcategory:performing;
+    .
+
+keywordresource:screening a keywords:Keyword;
+    rdfs:label "Screening"@en;
+    rdfs:comment "Screening"@en;
+    keywords:inSubCategory keywordsubcategory:performing;
+    .
+
+keywordresource:rehearsal a keywords:Keyword;
+    rdfs:label "Rehearsal"@en;
+    rdfs:comment "Rehearsal"@en;
+    keywords:inSubCategory keywordsubcategory:performing;
+    .
+
+keywordresource:club a keywords:Keyword;
+    rdfs:label "Club"@en;
+    rdfs:comment "Club"@en;
+    keywords:inSubCategory keywordsubcategory:performing;
+    .
+
+keywordresource:gig a keywords:Keyword;
+    rdfs:label "Gig"@en;
+    rdfs:comment "Gig"@en;
+    keywords:inSubCategory keywordsubcategory:performing;
+    .
+
+# Fora
+
 keywordresource:conference a keywords:Keyword;
     rdfs:label "Conference"@en;
     rdfs:comment "Conference"@en;
-    keywords:inSubCategory keywordsubcategory:formal;
+    keywords:inSubCategory keywordsubcategory:fora;
+    .
+
+keywordresource:symposium a keywords:Keyword;
+    rdfs:label "Symposium"@en;
+    rdfs:comment "Symposium"@en;
+    keywords:inSubCategory keywordsubcategory:fora;
+    .
+
+keywordresource:festival a keywords:Keyword;
+    rdfs:label "Festival"@en;
+    rdfs:comment "Festival"@en;
+    keywords:inSubCategory keywordsubcategory:fora;
+    .
+
+keywordresource:exhibition a keywords:Keyword;
+    rdfs:label "Exhibition"@en;
+    rdfs:comment "Exhibition"@en;
+    keywords:inSubCategory keywordsubcategory:fora;
+    .
+
+# Disseminating
+
+keywordresource:lecture a keywords:Keyword;
+    rdfs:label "Lecture"@en;
+    rdfs:comment "Lecture"@en;
+    keywords:inSubCategory keywordsubcategory:disseminating;
+    .
+
+keywordresource:seminar a keywords:Keyword;
+    rdfs:label "Seminar"@en;
+    rdfs:comment "Seminar"@en;
+    keywords:inSubCategory keywordsubcategory:disseminating;
+    .
+
+keywordresource:masterclass a keywords:Keyword;
+    rdfs:label "Masterclass"@en;
+    rdfs:comment "Masterclass"@en;
+    keywords:inSubCategory keywordsubcategory:disseminating;
+    .
+
+keywordresource:presentation a keywords:Keyword;
+    rdfs:label "Presentation"@en;
+    rdfs:comment "Presentation"@en;
+    keywords:inSubCategory keywordsubcategory:disseminating;
     .
