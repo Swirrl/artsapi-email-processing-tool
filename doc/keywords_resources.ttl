@@ -22,14 +22,9 @@ keywordcategory:developing a keywords:KeywordCategory;
     rdfs:comment "Developing"@en;
     .
 
-keywordcategory:promotion a keywords:KeywordCategory;
-    rdfs:label "Promotion"@en;
-    rdfs:comment "Promotion"@en;
-    .
-
-keywordcategory:networking a keywords:KeywordCategory;
-    rdfs:label "Networking"@en;
-    rdfs:comment "Networking"@en;
+keywordcategory:pr a keywords:KeywordCategory;
+    rdfs:label "PR"@en;
+    rdfs:comment "PR"@en;
     .
 
 keywordcategory:events a keywords:KeywordCategory;
@@ -82,22 +77,16 @@ keywordsubcategory:writing a keywords:KeywordSubCategory;
     keywords:inCategory keywordcategory:developing;
     .
 
-keywordsubcategory:marketing a keywords:KeywordSubCategory;
+keywordcategory:marketing a keywords:KeywordSubCategory;
     rdfs:label "Marketing"@en;
     rdfs:comment "Marketing"@en;
-    keywords:inCategory keywordcategory:promotion;
+    keywords:inCategory keywordcategory:pr;
     .
 
-keywordsubcategory:informal a keywords:KeywordSubCategory;
-    rdfs:label "Informal"@en;
-    rdfs:comment "Informal"@en;
-    keywords:inCategory keywordcategory:networking;
-    .
-
-keywordsubcategory:formal a keywords:KeywordSubCategory;
-    rdfs:label "Formal"@en;
-    rdfs:comment "Formal"@en;
-    keywords:inCategory keywordcategory:networking;
+keywordsubcategory:networking a keywords:KeywordSubCategory;
+    rdfs:label "Networking"@en;
+    rdfs:comment "Networking"@en;
+    keywords:inCategory keywordcategory:pr;
     .
 
 keywordsubcategory:performing a keywords:KeywordSubCategory;
@@ -477,8 +466,8 @@ keywordresource:application a keywords:Keyword;
     keywords:inSubCategory keywordsubcategory:writing;
     .
 
-# PROMOTION
-# /////////
+# PR
+# //
 
 # Marketing
 
@@ -506,30 +495,97 @@ keywordresource:exposure a keywords:Keyword;
     keywords:inSubCategory keywordsubcategory:marketing;
     .
 
-# NETWORKING
-# //////////
+keywordresource:publicity a keywords:Keyword;
+    rdfs:label "Publicity"@en;
+    rdfs:comment "Publicity"@en;
+    keywords:inSubCategory keywordsubcategory:marketing;
+    .
 
-# Informal
+keywordresource:broadcast a keywords:Keyword;
+    rdfs:label "Broadcast"@en;
+    rdfs:comment "Broadcast"@en;
+    keywords:inSubCategory keywordsubcategory:marketing;
+    .
+
+keywordresource:announcement a keywords:Keyword;
+    rdfs:label "Announcement"@en;
+    rdfs:comment "Announcement"@en;
+    keywords:inSubCategory keywordsubcategory:marketing;
+    .
+
+keywordresource:tv a keywords:Keyword;
+    rdfs:label "TV"@en;
+    rdfs:comment "TV"@en;
+    keywords:inSubCategory keywordsubcategory:marketing;
+    .
+
+keywordresource:newspaper a keywords:Keyword;
+    rdfs:label "Newspaper"@en;
+    rdfs:comment "Newspaper"@en;
+    keywords:inSubCategory keywordsubcategory:marketing;
+    .
+
+# Networking
 
 keywordresource:chat a keywords:Keyword;
     rdfs:label "Chat"@en;
     rdfs:comment "Chat"@en;
-    keywords:inSubCategory keywordsubcategory:informal;
+    keywords:inSubCategory keywordsubcategory:networking;
     .
 
 keywordresource:coffee a keywords:Keyword;
     rdfs:label "Coffee"@en;
     rdfs:comment "Coffee"@en;
-    keywords:inSubCategory keywordsubcategory:informal;
+    keywords:inSubCategory keywordsubcategory:networking;
     .
 
-# Formal
+keywordresource:party a keywords:Keyword;
+    rdfs:label "Party"@en;
+    rdfs:comment "Party"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
 
-#keywordresource:conference a keywords:Keyword;
-#    rdfs:label "Conference"@en;
-#    rdfs:comment "Conference"@en;
-#    keywords:inSubCategory keywordsubcategory:formal;
-#    .
+keywordresource:dinner a keywords:Keyword;
+    rdfs:label "Dinner"@en;
+    rdfs:comment "Dinner"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
+
+keywordresource:lunch a keywords:Keyword;
+    rdfs:label "Lunch"@en;
+    rdfs:comment "Lunch"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
+
+keywordresource:drinks a keywords:Keyword;
+    rdfs:label "Drinks"@en;
+    rdfs:comment "Drinks"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
+
+keywordresource:vip a keywords:Keyword;
+    rdfs:label "VIP"@en;
+    rdfs:comment "VIP"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
+
+keywordresource:reception a keywords:Keyword;
+    rdfs:label "Reception"@en;
+    rdfs:comment "Reception"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
+
+keywordresource:launch a keywords:Keyword;
+    rdfs:label "Launch"@en;
+    rdfs:comment "Launch"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
+
+keywordresource:opening a keywords:Keyword;
+    rdfs:label "Opening"@en;
+    rdfs:comment "Opening"@en;
+    keywords:inSubCategory keywordsubcategory:networking;
+    .
 
 # EVENTS
 # //////
