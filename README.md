@@ -16,7 +16,7 @@ Use `lein run <path-to-mbox-file> <destination.ttl>` to convert Email or Twitter
 
 To import into a db, use `lein run <path-to-mbox-file> <query-endpoint> <update-endpoint>` and your emails will be converted and loaded into the db in batches.
 
-*Please Note* very large mbox files have to be loaded into memory first. This is why the JVM memory allocation is set very high (7GB) - reduce this in `project.clj` if necessary. This converter has been tested with this configuration with files up to 2.85GB and will still run correctly. Any larger and you will have to break your mbox file up into smaller collections before you can convert it.
+*Please Note*: very large mbox files have to be loaded into memory first. This is why the JVM memory allocation is set very high (7GB) - reduce this in `project.clj` if necessary. This converter has been tested with this configuration with files up to 2.85GB and will still run correctly. Any larger and you will have to break your mbox file up into smaller collections before you can convert it.
 
 ## License
 
