@@ -60,3 +60,10 @@ keywords:inSubCategory a owl:ObjectProperty, rdf:Property;
     rdfs:domain keywords:Keyword;
     rdfs:range keywords:KeywordSubCategory;
     .
+
+keywords:hasInflection a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Has inflection"@en;
+    rdfs:comment "Has an inflection of the base Keyword that can be considered equivalent for the purposes of Keyword Analysis."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain keywords:Keyword;
+    .
