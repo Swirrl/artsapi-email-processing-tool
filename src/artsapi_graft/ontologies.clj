@@ -39,6 +39,10 @@
 
 (def arts:hasDomain (arts "hasDomain"))
 
+(def arts:sentEmails (arts "sentEmails"))
+
+(def arts:incomingEmails (arts "incomingEmails"))
+
 (def arts:position (arts "position"))
 
 (def arts:containsKeyword (arts "containsKeyword"))

@@ -7,14 +7,25 @@
 (defn init-store [path]
   (store path))
 
+(defn mbox-folder->quads
+  [messages]
+  (lazy-cat (email-sender-pipeline messages)
+            (to-field->quads messages)
+            (cc-field->quads messages)
+            (keywords->quads messages)))
+
 (defn email->quads
   [path]
-  (let [store (init-store path)] 
-    (let [messages (->> [:default "inbox" "sent"] (get-all-messages store))]
-      (lazy-cat (email-sender-pipeline messages)
-                (to-field->quads messages)
-                (cc-field->quads messages)
-                (keywords->quads messages)))))
+  (let [store (init-store path)]
+    (let [inbox-messages (->> ["inbox"] (get-all-messages store))
+          sent-messages (->> ["sent"] (get-all-messages store))
+          mbox-owner (get-mbox-owner-uri sent-messages)]
+      (lazy-cat
+       (owner-metadata->quads mbox-owner
+                              inbox-messages
+                              sent-messages)
+       (mbox-folder->quads inbox-messages)
+       (mbox-folder->quads sent-messages)))))
 
 (defn twitter->quads
   [tweet-directory]

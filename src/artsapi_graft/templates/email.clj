@@ -21,6 +21,20 @@
     "nil"
     (s str)))
 
+(defn sent-emails-template
+  [person-uri messages]
+  (graph person-graph-uri
+         [person-uri
+          [rdf:a foaf:Person]
+          [arts:sentEmails (count messages)]]))
+
+(defn incoming-emails-template
+  [person-uri messages]
+  (graph person-graph-uri
+         [person-uri
+          [rdf:a foaf:Person]
+          [arts:incomingEmails (count messages)]]))
+
 (def sender-email-template
   (graph-fn [[from from-personal from-domain sent-date subject]]
 
