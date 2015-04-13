@@ -1,0 +1,29 @@
+<http://swirrl.com/id/sic/90031> a <http://swirrl.com/def/sic/SubClass>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Combined Arts";
+  <http://swirrl.com/def/sic/code> "90.03/1";
+  .
+
+<http://swirrl.com/id/sic/90011> a <http://swirrl.com/def/sic/SubClass>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Dance" ;
+  <http://swirrl.com/def/sic/code> "90.01/1";
+  .
+
+<http://swirrl.com/id/sic/90032> a <http://swirrl.com/def/sic/SubClass>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Literature";
+  <http://swirrl.com/def/sic/code> "90.03/2";
+  .
+
+<http://swirrl.com/id/sic/90012> a <http://swirrl.com/def/sic/SubClass>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Music";
+  <http://swirrl.com/def/sic/code> "90.01/2";
+  .
+
+<http://swirrl.com/id/sic/90013> a <http://swirrl.com/def/sic/SubClass>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Theatre";
+  <http://swirrl.com/def/sic/code> "90.01/3"
+  .
+
+<http://swirrl.com/id/sic/90033> a <http://swirrl.com/def/sic/SubClass>;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Visual Arts";
+  <http://swirrl.com/def/sic/code> "90.03/3";
+  .
