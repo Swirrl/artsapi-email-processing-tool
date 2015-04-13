@@ -4,7 +4,7 @@
   .
 
 <http://swirrl.com/id/sic/90011> a <http://swirrl.com/def/sic/SubClass>;
-  <http://www.w3.org/2000/01/rdf-schema#label> "Dance" ;
+  <http://www.w3.org/2000/01/rdf-schema#label> "Dance";
   <http://swirrl.com/def/sic/code> "90.01/1";
   .
 
