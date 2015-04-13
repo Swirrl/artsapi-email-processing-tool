@@ -131,6 +131,20 @@ arts:hasDomain a owl:ObjectProperty, rdf:Property;
     rdfs:range arts:Domain;
     .
 
+arts:sentEmails a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Number of Sent Emails"@en;
+    rdfs:comment "Indicates the number of Emails a Person has sent."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    .
+
+arts:incomingEmails a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Number of Incoming Emails"@en;
+    rdfs:comment "Indicates the number of Emails a Person has received."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    .
+
 arts:position a owl:ObjectProperty, rdf:Property;
     rdfs:label "Position"@en;
     rdfs:comment "Indicates the position or role of a foaf:Person in an organisation to which they belong."@en;

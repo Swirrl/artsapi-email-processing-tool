@@ -116,6 +116,8 @@
            [rdf:a arts:Domain]
            [vcard:hasUrl (s (str "http://" domain))]])))
 
+;; This does not add the keyword properties as it is assumed you
+;; will use the data in the doc folder to seed your db with the keywords
 (defn keyword-email-template 
   [included-keyword {:keys [from sent-date subject]}]
 
