@@ -6,27 +6,14 @@
             [artsapi-graft.twitter :as tweet :refer [get-mentions
                                                      get-tweets-from-archive]]
             [artsapi-graft.pipeline :refer :all]
-            [artsapi-graft.keywords :refer [included-keywords]]
-            [artsapi-graft.prefixers :as prefixers :refer [resource-uri]]))
+            [artsapi-graft.keywords :refer [included-keywords]]))
 
 ;; not strictly grafts
-
-(defn get-mbox-owner-uri
-  [messages]
-  (let [first-message (take 1 messages)
-        from (:from first-message)]
-    (prefixers/resource-uri "people" from)))
 
 (defn email-sender-pipeline
   [messages]
   (-> (get-sender-email-ds messages)
       (sender-email-template)))
-
-(defn owner-metadata->quads
-  [owner-uri inbox-messages sent-messages]
-  (lazy-cat
-   (incoming-emails-template owner-uri inbox-messages)
-   (sent-emails-template owner-uri sent-messages)))
 
 (defn to-field->quads
   [messages]
