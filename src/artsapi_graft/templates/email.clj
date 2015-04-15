@@ -121,11 +121,12 @@
 (defn keyword-email-template 
   [included-keyword {:keys [from sent-date subject]}]
 
-  (graph person-graph-uri
-         [(resource-uri "people" from)
-          [arts:mentionedKeyword (resource-uri "keywords/keyword" included-keyword)]])
-  
-  (graph email-graph-uri
-         [(email-uri from sent-date subject)
-          [arts:containsKeyword (resource-uri "keywords/keyword" included-keyword)]]))
+  (concat 
+   (graph person-graph-uri
+          [(resource-uri "people" from)
+           [arts:mentionedKeyword (resource-uri "keywords/keyword" included-keyword)]])
+   
+   (graph email-graph-uri
+          [(email-uri from sent-date subject)
+           [arts:containsKeyword (resource-uri "keywords/keyword" included-keyword)]])))
 
