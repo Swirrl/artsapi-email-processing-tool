@@ -187,7 +187,7 @@ arts:functionalArea a owl:ObjectProperty, rdf:Property;
 
 arts:mentionedKeyword a owl:ObjectProperty, rdf:Property;
     rdfs:label "Mentioned keyword"@en;
-    rdfs:comment "Indicates a Keyword that was mentioned enough times in emails by the subject (a foaf:Person) to be flagged as significant and generate this triple."@en;
+    rdfs:comment "Indicates a Keyword that was mentioned in emails by the subject (a foaf:Person)."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:subPropertyOf arts:functionalArea;
     rdfs:domain foaf:Person;

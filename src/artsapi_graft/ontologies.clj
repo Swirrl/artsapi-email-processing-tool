@@ -45,6 +45,8 @@
 
 (def arts:position (arts "position"))
 
+(def arts:mentionedKeyword (arts "mentionedKeyword"))
+
 (def arts:containsKeyword (arts "containsKeyword"))
 
 (def arts:worksOn (arts "worksOn"))
