@@ -13,3 +13,4 @@ tweets*.ttl
 emails*.ttl
 *.#*.clj
 *#*.clj#
+*.sh

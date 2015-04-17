@@ -29,7 +29,7 @@
                     ;;[rdfs:label (s subject)]
                     [rdf:a arts:Email]
                     [arts:emailSender (resource-uri "people" from)]
-                    ;;[arts:emailSubject (s subject)]
+                    [arts:emailSubject (s subject)]
                     [arts:hasDomain (resource-uri "domains" from-domain)]
                     [arts:sentAt (s sent-date)]])
 
