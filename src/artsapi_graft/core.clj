@@ -23,10 +23,10 @@
   [quads]
   (remove (fn [quad]
             (or (in-quad? "nil" quad)
-                (in-quad? "http://artsapi.co.uk/id/organisations/nil-example-com" quad)
-                (in-quad? "http://artsapi.co.uk/id/domains/nil-example-com" quad)
-                (in-quad? "http://artsapi.co.uk/id/people/nil" quad)
-                (in-quad? "http://artsapi.co.uk/id/people/undisclosed-recipients:;" quad)
+                (in-quad? "http://data.artsapi.co.uk/id/organisations/nil-example-com" quad)
+                (in-quad? "http://data.artsapi.co.uk/id/domains/nil-example-com" quad)
+                (in-quad? "http://data.artsapi.co.uk/id/people/nil" quad)
+                (in-quad? "http://data.artsapi.co.uk/id/people/undisclosed-recipients:;" quad)
                 (in-quad? "nil.example.com" quad)
                 (in-quad? "http://nil.example.com" quad)))
           quads))

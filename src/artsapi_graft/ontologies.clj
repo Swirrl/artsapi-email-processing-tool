@@ -3,9 +3,11 @@
 
 ;; classes
 
-(def arts-domain (prefixer "http://artsapi.com/"))
+(def arts-domain (prefixer "http://data.artsapi.com/"))
 
-(def arts (prefixer "http://artsapi.com/def/arts/"))
+(def arts (prefixer "http://data.artsapi.com/def/arts/"))
+
+(def keywords (prefixer (arts "keywords/")))
 
 (def arts:Domain (arts "Domain"))
 
@@ -37,7 +39,13 @@
 
 (def arts:hasDomain (arts "hasDomain"))
 
+(def arts:sentEmails (arts "sentEmails"))
+
+(def arts:incomingEmails (arts "incomingEmails"))
+
 (def arts:position (arts "position"))
+
+(def arts:mentionedKeyword (arts "mentionedKeyword"))
 
 (def arts:containsKeyword (arts "containsKeyword"))
 
@@ -80,6 +88,22 @@
 (def arts:endorsee (arts "endorsee"))
 
 (def arts:mentions (arts "mentions"))
+
+;; keywords classes
+
+(def keywords:KeywordCategory (keywords "KeywordCategory"))
+
+(def keywords:KeywordSubCategory (keywords "KeywordSubCategory"))
+
+(def keywords:Keyword (keywords "Keyword"))
+
+;; keywords properties
+
+(def keywords:inCategory (keywords "inCategory"))
+
+(def keywords:inSubCategory (keywords "inSubCategory"))
+
+(def keywords:hasInflection (keywords "hasInflection"))
 
 ;; catch missing vcard org and foaf terms
 

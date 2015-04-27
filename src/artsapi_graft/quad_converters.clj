@@ -8,13 +8,23 @@
   (store path))
 
 (defn email->quads
+  [path] 
+  (let [store (init-store path)
+        messages (->> [:default] (get-all-messages store))]
+    (lazy-cat
+     (email-sender-pipeline messages)
+     (to-field->quads messages)
+     (cc-field->quads messages)
+     (keywords->quads messages))))
+
+(defn email->quads-excluding-keywords
   [path]
-  (let [store (init-store path)] 
-    (let [messages (->> [:default "inbox" "sent"] (get-all-messages store))]
-      (lazy-cat (email-sender-pipeline messages)
-                (to-field->quads messages)
-                (cc-field->quads messages)
-                (keywords->quads messages)))))
+  (let [store (init-store path)
+        messages (->> [:default] (get-all-messages store))]
+    (lazy-cat
+     (email-sender-pipeline messages)
+     (to-field->quads messages)
+     (cc-field->quads messages))))
 
 (defn twitter->quads
   [tweet-directory]
@@ -33,3 +43,4 @@
               (linkedin-recommendations-received-graft path-to-directory primary)
               (linkedin-skills-graft path-to-directory primary)
               (linkedin-ad-targeting-graft path-to-directory primary))))
+   

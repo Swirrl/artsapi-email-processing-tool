@@ -21,6 +21,12 @@
     "nil"
     (s str)))
 
+(defn catch-no-subject
+  [subj]
+  (if (nil? subj)
+    (s "No Subject")
+    (s subj)))
+
 (def sender-email-template
   (graph-fn [[from from-personal from-domain sent-date subject]]
 
@@ -29,7 +35,7 @@
                     ;;[rdfs:label (s subject)]
                     [rdf:a arts:Email]
                     [arts:emailSender (resource-uri "people" from)]
-                    ;;[arts:emailSubject (s subject)]
+                    ;;[arts:emailSubject (catch-no-subject subject)]
                     [arts:hasDomain (resource-uri "domains" from-domain)]
                     [arts:sentAt (s sent-date)]])
 
@@ -116,10 +122,17 @@
            [rdf:a arts:Domain]
            [vcard:hasUrl (s (str "http://" domain))]])))
 
+;; This does not add the keyword properties as it is assumed you
+;; will use the data in the doc folder to seed your db with the keywords
 (defn keyword-email-template 
   [included-keyword {:keys [from sent-date subject]}]
 
-  (graph email-graph-uri
-         [(email-uri from sent-date subject)
-          [arts:containsKeyword (resource-uri "keywords/keyword" included-keyword)]]))
+  (concat 
+   (graph person-graph-uri
+          [(resource-uri "people" from)
+           [arts:mentionedKeyword (resource-uri "keywords/keyword" included-keyword)]])
+   
+   (graph email-graph-uri
+          [(email-uri from sent-date subject)
+           [arts:containsKeyword (resource-uri "keywords/keyword" included-keyword)]])))
 

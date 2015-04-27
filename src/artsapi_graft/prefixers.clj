@@ -31,6 +31,8 @@
 
 (def linkedin-skill-graph-uri (base-graph "linkedin-skills"))
 
+(def keywords-graph-uri (base-graph "keywords"))
+
 ;; resource uris
 
 (def base-resource-uri (prefixer (arts-domain "id/")))
