@@ -17,6 +17,15 @@
      (cc-field->quads messages)
      (keywords->quads messages))))
 
+(defn email->quads-excluding-keywords
+  [path]
+  (let [store (init-store path)
+        messages (->> [:default] (get-all-messages store))]
+    (lazy-cat
+     (email-sender-pipeline messages)
+     (to-field->quads messages)
+     (cc-field->quads messages))))
+
 (defn twitter->quads
   [tweet-directory]
   (let [tweets (tweet/get-tweets-from-archive tweet-directory)]
