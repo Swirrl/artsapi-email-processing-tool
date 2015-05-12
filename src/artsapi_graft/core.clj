@@ -84,5 +84,9 @@
   ([path query-url update-url]
      (-> (dispatcher path)
          (load->db query-url update-url))
+     (println "-> Load complete"))
+  ([path query-url update-url do-not-convert]
+     (-> (email->quads-excluding-keywords path)
+         (load->db query-url update-url))
      (println "-> Load complete")))
 
