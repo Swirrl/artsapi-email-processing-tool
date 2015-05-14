@@ -41,7 +41,7 @@
 
             (graph person-graph-uri
                    [(resource-uri "people" from)
-                    [rdfs:label (catch-nil->s from-personal)]
+                    ;;[rdfs:label (catch-nil->s from-personal)]
                     [rdf:a foaf:Person]
                     [foaf:name (catch-nil->s from-personal)]
                     [vcard:hasEmail (s from)]
@@ -72,7 +72,7 @@
 
    (graph person-graph-uri
           [(resource-uri "people" email)
-           [rdfs:label (catch-nil->s personal)]
+           ;;[rdfs:label (catch-nil->s personal)]
            [rdf:a foaf:Person]
            [foaf:name (catch-nil->s personal)]
            [vcard:hasEmail (s email)]
@@ -102,7 +102,7 @@
    
    (graph person-graph-uri
           [(resource-uri "people" email)
-           [rdfs:label (catch-nil->s personal)]
+           ;;[rdfs:label (catch-nil->s personal)]
            [rdf:a foaf:Person]
            [foaf:name (catch-nil->s personal)]
            [vcard:hasEmail (s email)]
