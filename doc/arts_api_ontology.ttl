@@ -124,6 +124,27 @@ arts:ownsDomain a owl:ObjectProperty, rdf:Property;
     rdfs:range arts:Domain;
     .
 
+arts:sector a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Owns domain"@en;
+    rdfs:comment "Indicates a web domain that is owned by an Organization."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain org:Organization;
+    .
+
+arts:locationCountry a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Location (Country)"@en;
+    rdfs:comment "Indicates the Country in which an Organization is based."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain org:Organization;
+    .
+
+arts:locationCity a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Location (City)"@en;
+    rdfs:comment "Indicates the Town or City in which an Organization is based."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain org:Organization;
+    .
+
 arts:hasDomain a owl:ObjectProperty, rdf:Property;
     rdfs:label "Has domain"@en;
     rdfs:comment "Indicates that the thing to which this property refers has a connection to a Domain. In the case of an Email, it would refer to the Domain the Email was sent from. A foaf:OnlineAccount for example might also be linked to the Domain on which the account was registered."@en;
@@ -141,6 +162,13 @@ arts:sentEmails a owl:ObjectProperty, rdf:Property;
 arts:incomingEmails a owl:ObjectProperty, rdf:Property;
     rdfs:label "Number of Incoming Emails"@en;
     rdfs:comment "Indicates the number of Emails a Person has received."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain foaf:Person;
+    .
+
+arts:visualisation a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Visualisation"@en;
+    rdfs:comment "Returns a string that can be parsed as JSON to render a visualisation."@en;
     rdfs:isDefinedBy arts:ontology;
     rdfs:domain foaf:Person;
     .
