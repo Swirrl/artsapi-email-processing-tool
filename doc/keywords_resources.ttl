@@ -1,6 +1,6 @@
 @prefix rdf:                    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:                   <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix keywords:               <http://data.artsapi.com/graph/keywords> .
+@prefix keywords:               <http://data.artsapi.com/def/arts/keywords/> .
 @prefix keywordcategory:        <http://data.artsapi.com/id/keywords/category/> .
 @prefix keywordsubcategory:     <http://data.artsapi.com/id/keywords/subcategory/> .
 @prefix keywordresource:        <http://data.artsapi.com/id/keywords/keyword/> .
