@@ -124,6 +124,14 @@ arts:ownsDomain a owl:ObjectProperty, rdf:Property;
     rdfs:range arts:Domain;
     .
 
+arts:commonSubjectArea a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Common subject area"@en;
+    rdfs:comment "Indicates a subject area (in terms of a KeywordCategory) that is commonly found among employees of this organisation."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain org:Organization;
+    rdfs:range keywords:KeywordCategory;
+    .
+
 arts:sector a owl:ObjectProperty, rdf:Property;
     rdfs:label "Sector"@en;
     rdfs:comment "Indicates the sector (either within SIC or the SIC extensions) in which an organisation operates."@en;
