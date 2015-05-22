@@ -132,6 +132,14 @@ arts:commonSubjectArea a owl:ObjectProperty, rdf:Property;
     rdfs:range keywords:KeywordCategory;
     .
 
+arts:commonKeyword a owl:ObjectProperty, rdf:Property;
+    rdfs:label "Common keyword"@en;
+    rdfs:comment "Indicates a Keyword that is commonly found among emails of employees of this organisation."@en;
+    rdfs:isDefinedBy arts:ontology;
+    rdfs:domain org:Organization;
+    rdfs:range keywords:Keyword;
+    .
+
 arts:sector a owl:ObjectProperty, rdf:Property;
     rdfs:label "Sector"@en;
     rdfs:comment "Indicates the sector (either within SIC or the SIC extensions) in which an organisation operates."@en;
