@@ -1,5 +1,6 @@
 (ns artsapi-graft.core
-  (:require [grafter.rdf.protocols :as pr]
+  (:require [clojure.java.io :as javaio]
+            [grafter.rdf.protocols :as pr]
             [artsapi-graft.quad-converters :refer :all]
             [grafter.rdf :as rdf]
             [grafter.rdf.io :as io]
@@ -76,6 +77,19 @@
     (re-find #"tweets\z" path) (twitter->quads path)
     (re-find #"mbox\z" path) (email->quads path)
     (re-find #"LinkedInDataExport" path) (linkedin->quads path)))
+
+;; usage: (def array (map str (walk "path-to-directory-here" #".*\.mbox")))
+(defn walk [dirpath pattern]
+  "A cribbed example of recursively finding files and filtering.
+   Use as in the comment above, the hand the seq off to the seq->db function below"
+  (doall (filter #(re-matches pattern (.getName %))
+                 (file-seq (javaio/file dirpath)))))
+
+(defn seq->db
+  [seq query-url update-url]
+  (map #(-> (email->quads %)
+            (load->db query-url update-url))
+       seq))
 
 (defn -main
   ([path output]
