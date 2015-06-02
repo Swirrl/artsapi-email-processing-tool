@@ -4,7 +4,7 @@
 
 (defn read-whole-file
   [file-path]
-  (with-open [reader (io/reader file-path)]
+  (with-open [reader (io/reader (io/resource file-path))]
     (doall (line-seq reader))))
 
 (defn read-file-from-line-two

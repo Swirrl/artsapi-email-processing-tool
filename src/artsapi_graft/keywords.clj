@@ -2,7 +2,7 @@
   (:require [artsapi-graft.json :refer :all]))
 
 (def keywords->seq
-  (-> (->> (read-whole-file "resources/keywords.json")
+  (-> (->> (read-whole-file "keywords.json")
            (reduce str))
       json->keyword-hash
       ((partial map #(:keyword %)))

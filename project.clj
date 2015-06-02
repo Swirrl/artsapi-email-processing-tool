@@ -8,6 +8,8 @@
                  [org.mnode.mstor/mstor "0.9.13"]
                  [clojure-mail "0.1.6"]
                  [digest "1.4.4"]
-                 [cheshire "5.4.0"]]
+                 [cheshire "5.4.0"]
+                 [org.slf4j/slf4j-jdk14 "1.7.5"]]
   :jvm-opts ["-Xmx7g"]
-  :main artsapi-graft.core)
+  :main artsapi-graft.core
+  :aot [artsapi-graft.core])
