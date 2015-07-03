@@ -25,7 +25,16 @@ Subclasses, with new unofficial SIC classifications:
 
 These can be found as linked data resources in `doc/sic_extensions.ttl`.
 
-It is worth noting as well that these might for example be considered to also belong (in purely economic terms) to other categories - for example, you _might_ prefer to consider 'Literature' as being more correctly suited to being a subclass of `Section J, Division 58, Group 58.1, Class 58.11: Book Publishing`. Another example might be that 'Music' could also be under `Section J, Division 59, Group 59.2, Class 59.20: Sound recording and music publishing activities` - 'Music' is therefore, for the purposes of this heuristic, considered a performing art, rather than a recorded work. In any case, these subtle ambiguities are left to the reader to unpick.
+It is worth noting as well that these might for example be considered to also belong (in purely economic terms) to other categories - for example, you _might_ prefer to consider 'Literature' as being more correctly suited to being a subclass of `Section J, Division 58, Group 58.1, Class 58.11: Book Publishing`. Another example might be that 'Music' could also be under `Section J, Division 59, Group 59.2, Class 59.20: Sound recording and music publishing activities` - 'Music' is therefore, for the purposes of this heuristic, considered a performing art, rather than a recorded work. In any case, these subtle ambiguities are left to the user to unpick.
+
+In order to add the Charitable sector, an extra heading has been added - Section V, which breaks down into one subdivision and two groups, `100.1` and `100.2`. These contain two Classes for use, detailed here:
+
+1. Charitable activities [V 100.10]
+2. Voluntary or unpaid activities n.e.c. [V 100.20]
+
+These can be found as linked data resources in `doc/sic_extensions.ttl`.
+
+NB: In SIC, 'n.e.c.' is used throughout to mean 'Not Elsewhere Classified'.
 
 ## Usage
 
